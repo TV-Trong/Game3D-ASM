@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Invector.vCharacterController;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
@@ -15,14 +16,6 @@ public class AnimationController : MonoBehaviour
 
     private void OnFire()
     {
-        Vector3 x = new Vector3(0.1f, .1f, .1f);
-        isMoving = (Mathf.Abs(rb.velocity.x) > x.x || Mathf.Abs(rb.velocity.z) > x.z);
-        animator.SetBool("IsMoving", isMoving);
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            animator.SetTrigger("SpinAttack");
-            return;
-        }
         animator.SetTrigger("Attack");
     }
 }

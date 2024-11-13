@@ -124,5 +124,10 @@ namespace Invector.vCharacterController
             else
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
+        
+        public void SetMagnitude(float magnitude)
+        {
+            inputMagnitude = magnitude;
+        }
     }
 }
