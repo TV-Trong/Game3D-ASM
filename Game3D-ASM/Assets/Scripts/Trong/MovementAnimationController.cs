@@ -34,7 +34,6 @@ public class MovementAnimationController : StateMachineBehaviour
             if (_rigidbody != null) _rigidbody.drag += Time.deltaTime * 5;
             inputMagnitude -= Time.deltaTime / 5;
             inputMagnitude = Mathf.Clamp(inputMagnitude, 0, inputMagnitude);
-            Debug.Log(inputMagnitude);
             vTPController.SetMagnitude(inputMagnitude);
         }
 

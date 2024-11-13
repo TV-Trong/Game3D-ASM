@@ -25,6 +25,19 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 990, y: 100, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7280073358526717667}
+--- !u!114 &-7709527837892557844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cb17b4ac453f74f9a0a8af1276bd42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovementAllowed: 1
 --- !u!1102 &-7280073358526717667
 AnimatorState:
   serializedVersion: 6
@@ -38,7 +51,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 3425524635715913595}
   m_StateMachineBehaviours:
-  - {fileID: 7698577232902129121}
+  - {fileID: -7709527837892557844}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -60,7 +73,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1H
+  m_Name: 1H-Combo-Part1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -19494,9 +19507,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 1
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.3
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 0.8
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -19527,19 +19540,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &7698577232902129121
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cb17b4ac453f74f9a0a8af1276bd42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMovementAllowed: 1
 --- !u!114 &9009996100725858355
 MonoBehaviour:
   m_ObjectHideFlags: 1
