@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cb17b4ac453f74f9a0a8af1276bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMovementAllowed: 1
+  isMovementAllowed: 0
 --- !u!1107 &-8880535467418612800
 AnimatorStateMachine:
   serializedVersion: 6
@@ -27,7 +27,7 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7280073358526717667}
-    m_Position: {x: 270, y: 60, z: 0}
+    m_Position: {x: 250, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8485658332650397729}
     m_Position: {x: 530, y: 20, z: 0}
@@ -48,7 +48,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spin Slash
+  m_Name: Heavy Slash
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -63,7 +63,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b144fe6ee25620146bcebb39eb3306f0, type: 2}
+  m_Motion: {fileID: 7400000, guid: a922fad90d775c547b1bb76d1c8a0276, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

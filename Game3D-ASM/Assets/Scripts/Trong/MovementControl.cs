@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Invector.vCharacterController;
 using UnityEngine;
 
 public class MovementControl : StateMachineBehaviour
 {
     private PhysicalWeapon weapon;
     private Rigidbody rigidbody;
+    private vThirdPersonInput vTPInput;
     [SerializeField] private bool isMovementAllowed;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         weapon = animator.GetComponentInChildren<PhysicalWeapon>();
-        rigidbody = animator.GetComponent<Rigidbody>();
         weapon.EnableMovement(isMovementAllowed);
+        rigidbody = animator.GetComponent<Rigidbody>();
         if (!isMovementAllowed) rigidbody.velocity = Vector3.zero;
+        vTPInput = animator.GetComponent<vThirdPersonInput>();
+        vTPInput.isAttacking = !isMovementAllowed;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1545105}
   - component: {fileID: 1545107}
   - component: {fileID: 1545108}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sword
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 998434600}
-  activeTime: 1.5
+  activeTime: 3
 --- !u!1 &401637309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 998434600}
-  activeTime: 1.5
+  activeTime: 3
 --- !u!1 &774507476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,24 +1775,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1381341111}
-  smoothCameraRotation: 12
+  smoothCameraRotation: 8
   cullingLayer:
     serializedVersion: 2
     m_Bits: 1
   lockCamera: 0
   rightOffset: 0
-  defaultDistance: 2.5
-  height: 1.4
+  defaultDistance: 3
+  height: 1.8
   smoothFollow: 10
-  xMouseSensitivity: 3
-  yMouseSensitivity: 3
-  yMinLimit: -15
-  yMaxLimit: 15
+  xMouseSensitivity: 2
+  yMouseSensitivity: 2
+  yMinLimit: -90
+  yMaxLimit: 90
   indexList: 0
   indexLookPoint: 0
   offSetPlayerPivot: 0
   currentStateName: 
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1381341111}
   movementSpeed: {x: 0, y: 0}
 --- !u!1 &1001103578
 GameObject:
@@ -2578,6 +2578,37 @@ Transform:
   - {fileID: 1627081877}
   m_Father: {fileID: 1341645950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1366219694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1366219695}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1366219695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366219694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1381341111}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381341105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,14 +2618,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381341111}
-  - component: {fileID: 1381341110}
-  - component: {fileID: 1381341109}
-  - component: {fileID: 1381341108}
   - component: {fileID: 1381341107}
   - component: {fileID: 1381341106}
-  - component: {fileID: 1381341113}
+  - component: {fileID: 1381341110}
   - component: {fileID: 1381341112}
+  - component: {fileID: 1381341109}
+  - component: {fileID: 1381341108}
+  - component: {fileID: 1381341113}
   - component: {fileID: 1381341114}
+  - component: {fileID: 1381341115}
+  - component: {fileID: 1381341116}
   m_Layer: 0
   m_Name: Asuna
   m_TagString: Player
@@ -2767,6 +2800,7 @@ Transform:
   - {fileID: 1700411783}
   - {fileID: 1559446780}
   - {fileID: 1234358107}
+  - {fileID: 1366219695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1381341112
@@ -2836,6 +2870,32 @@ MonoBehaviour:
   <popupTextTransform>k__BackingField: {fileID: 1559446780}
   <healthSlider>k__BackingField: {fileID: 333803520}
   weapon: {fileID: 1545108}
+--- !u!114 &1381341115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381341105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d19bdeac45d7346a184993237fc22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1381341116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381341105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36abdec983387e40bc05058a7bb88f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openMenuKey: E
+  vTPCamera: {fileID: 998434602}
 --- !u!1 &1468205033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3345,7 @@ GameObject:
   - component: {fileID: 1704534649}
   - component: {fileID: 1704534651}
   - component: {fileID: 1704534650}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8261,7 +8321,7 @@ GameObject:
   - component: {fileID: 1846138084}
   - component: {fileID: 1846138086}
   - component: {fileID: 1846138085}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13112,7 +13172,7 @@ GameObject:
   - component: {fileID: 1847361779}
   - component: {fileID: 1847361781}
   - component: {fileID: 1847361780}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

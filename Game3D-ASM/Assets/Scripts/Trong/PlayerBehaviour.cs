@@ -44,21 +44,13 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             Invoke("ResetIFrame", iFrameTime);
         }
     }
-    public void HeavyAttack(float damage)
-    {
-        strength = damage;
-    }
-    public void EndHeavyAttack(float damage)
-    {
-        strength = damage;
-    }
 
-    public void AllowWeaponToAttack()
+    public void StartAttack()
     {
         weapon.ReadyToDealDamage();
     }
 
-    public void StopWeapon()
+    public void EndAttack()
     {
         weapon.StopDealingDamage();
     }
