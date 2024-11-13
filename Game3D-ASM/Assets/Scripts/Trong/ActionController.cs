@@ -17,13 +17,13 @@ public class ActionController : MonoBehaviour
     }
     private void Start()
     {
-        customAction = new InputAction("OpenInven", InputActionType.Button);
+        customAction = new InputAction("OpenMenu", InputActionType.Button);
         customAction.AddBinding("<Keyboard>/" +  openMenuKey);
-        customAction.performed += OnActionTriggered;
+        customAction.performed += OnOpenMenu;
         customAction.Enable();
     }
 
-    private void OnActionTriggered(InputAction.CallbackContext context)
+    private void OnOpenMenu(InputAction.CallbackContext context)
     {
         cursorControl.enabled = isMenuOpen;
         isMenuOpen = !isMenuOpen;

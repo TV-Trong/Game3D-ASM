@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1545105}
   - component: {fileID: 1545107}
   - component: {fileID: 1545108}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sword
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -1779,7 +1779,7 @@ MonoBehaviour:
   cullingLayer:
     serializedVersion: 2
     m_Bits: 1
-  lockCamera: 1
+  lockCamera: 0
   rightOffset: 0
   defaultDistance: 3
   height: 1.8
@@ -3345,7 +3345,7 @@ GameObject:
   - component: {fileID: 1704534649}
   - component: {fileID: 1704534651}
   - component: {fileID: 1704534650}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8321,7 +8321,7 @@ GameObject:
   - component: {fileID: 1846138084}
   - component: {fileID: 1846138086}
   - component: {fileID: 1846138085}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13172,7 +13172,7 @@ GameObject:
   - component: {fileID: 1847361779}
   - component: {fileID: 1847361781}
   - component: {fileID: 1847361780}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
