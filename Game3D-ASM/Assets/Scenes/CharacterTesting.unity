@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 998434600}
-  activeTime: 1.5
+  activeTime: 3
 --- !u!1 &401637309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 998434600}
-  activeTime: 1.5
+  activeTime: 3
 --- !u!1 &774507476
 GameObject:
   m_ObjectHideFlags: 0

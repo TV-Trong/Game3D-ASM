@@ -203,8 +203,7 @@ namespace Invector.vCharacterController
 
                     if (hitAngle > slopeLimit && hitAngle < 85f)
                     {
-                        //stopMove = true;
-                        stopMove = lockMovement? true : false;
+                        stopMove = true;
                         return;
                     }
                 }
