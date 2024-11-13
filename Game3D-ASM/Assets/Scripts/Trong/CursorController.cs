@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HideCursor : MonoBehaviour
+public class CursorController : MonoBehaviour
 {
     private void Start()
     {

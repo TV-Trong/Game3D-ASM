@@ -1775,24 +1775,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1381341111}
-  smoothCameraRotation: 12
+  smoothCameraRotation: 8
   cullingLayer:
     serializedVersion: 2
     m_Bits: 1
-  lockCamera: 0
+  lockCamera: 1
   rightOffset: 0
-  defaultDistance: 2.5
-  height: 1.4
+  defaultDistance: 3
+  height: 1.8
   smoothFollow: 10
-  xMouseSensitivity: 3
-  yMouseSensitivity: 3
-  yMinLimit: -15
-  yMaxLimit: 15
+  xMouseSensitivity: 2
+  yMouseSensitivity: 2
+  yMinLimit: -90
+  yMaxLimit: 90
   indexList: 0
   indexLookPoint: 0
   offSetPlayerPivot: 0
   currentStateName: 
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1381341111}
   movementSpeed: {x: 0, y: 0}
 --- !u!1 &1001103578
 GameObject:
@@ -2618,15 +2618,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381341111}
-  - component: {fileID: 1381341110}
-  - component: {fileID: 1381341109}
-  - component: {fileID: 1381341108}
   - component: {fileID: 1381341107}
   - component: {fileID: 1381341106}
-  - component: {fileID: 1381341113}
+  - component: {fileID: 1381341110}
   - component: {fileID: 1381341112}
+  - component: {fileID: 1381341109}
+  - component: {fileID: 1381341108}
+  - component: {fileID: 1381341113}
   - component: {fileID: 1381341114}
   - component: {fileID: 1381341115}
+  - component: {fileID: 1381341116}
   m_Layer: 0
   m_Name: Asuna
   m_TagString: Player
@@ -2878,9 +2879,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1381341105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa369e766b91ba41abb762e3153c1cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 47d19bdeac45d7346a184993237fc22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1381341116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381341105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36abdec983387e40bc05058a7bb88f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openMenuKey: E
+  vTPCamera: {fileID: 998434602}
 --- !u!1 &1468205033
 GameObject:
   m_ObjectHideFlags: 0
