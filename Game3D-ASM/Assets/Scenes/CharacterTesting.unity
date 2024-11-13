@@ -2699,6 +2699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: Horizontal
   verticallInput: Vertical
+  isAttacking: 0
   jumpInput: 32
   strafeInput: 9
   sprintInput: 304
@@ -2845,6 +2846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0637c6139bc7f48aca3e2590d8f338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowBufferTime: 0.8
+  part1Name: 1H-Combo-Part1
+  part2Name: 1H-Combo-Part2
 --- !u!114 &1381341114
 MonoBehaviour:
   m_ObjectHideFlags: 0

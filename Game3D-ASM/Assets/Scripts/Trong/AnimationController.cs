@@ -1,28 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Invector.vCharacterController;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
+    [SerializeField] private float allowBufferTime = 0.2f;
+    [SerializeField] private string part1Name;
+    [SerializeField] private string part2Name;
     private Animator animator;
-    private Rigidbody rb;
-    private bool isMoving;
+    private bool isAttackable = true;
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
     }
 
     private void OnFire()
     {
-        Vector3 x = new Vector3(0.1f, .1f, .1f);
-        isMoving = (Mathf.Abs(rb.velocity.x) > x.x || Mathf.Abs(rb.velocity.z) > x.z);
-        animator.SetBool("IsMoving", isMoving);
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (isAttackable)
         {
-            animator.SetTrigger("SpinAttack");
-            return;
+            animator.SetTrigger("Attack");
+            isAttackable = false;
+            Invoke("SetAttackable", allowBufferTime);
         }
-        animator.SetTrigger("Attack");
+    }
+    private void SetAttackable()
+    {
+        isAttackable = true;
     }
 }
