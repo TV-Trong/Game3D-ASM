@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using Invector.vCharacterController;
 using UnityEngine;
 
-public class MovementAnimationController : StateMachineBehaviour
+public class AttackStateController : StateMachineBehaviour
 {
     private vThirdPersonController vTPController;
     private PhysicalWeapon weapon;
     private Rigidbody _rigidbody;
     private vThirdPersonInput vTPInput;
-    private float inputMagnitude = 0.5f;
+    [SerializeField] private float inputMagnitude = .75f;
     [SerializeField] private bool isMovementAllowed;
+    [SerializeField] private AvatarMask fullbodyMask;
+    [SerializeField] private AvatarMask upperbodyMask;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         vTPController = animator.GetComponent<vThirdPersonController>();
-        if (!isMovementAllowed)
+        if (!isMovementAllowed && vTPController.inputMagnitude > 0.1f)
         {
-            inputMagnitude = 0.5f;
+            inputMagnitude = .75f;
+            vTPController.SetMagnitude(inputMagnitude);
+        }
+        else if (vTPController.inputMagnitude < 0.1f)
+        {
+            Debug.Log("OK");
+            inputMagnitude = .75f;
             vTPController.SetMagnitude(inputMagnitude);
         }
         _rigidbody = animator.GetComponent<Rigidbody>();
@@ -32,7 +40,7 @@ public class MovementAnimationController : StateMachineBehaviour
         if (!isMovementAllowed) 
         { 
             if (_rigidbody != null) _rigidbody.drag += Time.deltaTime * 5;
-            inputMagnitude -= Time.deltaTime / 5;
+            inputMagnitude -= Time.deltaTime / 3;
             inputMagnitude = Mathf.Clamp(inputMagnitude, 0, inputMagnitude);
             vTPController.SetMagnitude(inputMagnitude);
         }

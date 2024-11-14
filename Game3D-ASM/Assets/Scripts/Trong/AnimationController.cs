@@ -6,8 +6,6 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     [SerializeField] private float allowBufferTime = 0.2f;
-    [SerializeField] private string part1Name;
-    [SerializeField] private string part2Name;
     private Animator animator;
     private bool isAttackable = true;
     private void Awake()
