@@ -3,45 +3,33 @@ using System.Collections.Generic;
 using Invector.vCharacterController;
 using UnityEngine;
 
-public class MovementAnimationController : StateMachineBehaviour
+public class AttackStateController : StateMachineBehaviour
 {
-    private vThirdPersonController vTPController;
     private PhysicalWeapon weapon;
     private Rigidbody _rigidbody;
     private vThirdPersonInput vTPInput;
-    private float inputMagnitude = 0.5f;
     [SerializeField] private bool isMovementAllowed;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        vTPController = animator.GetComponent<vThirdPersonController>();
-        if (!isMovementAllowed)
-        {
-            inputMagnitude = 0.5f;
-            vTPController.SetMagnitude(inputMagnitude);
-        }
         _rigidbody = animator.GetComponent<Rigidbody>();
         weapon = animator.GetComponentInChildren<PhysicalWeapon>();
-        weapon.EnableMovement(isMovementAllowed);
         vTPInput = animator.GetComponent<vThirdPersonInput>();
+
+        weapon.EnableMovement(isMovementAllowed);
         vTPInput.isAttacking = !isMovementAllowed;
+        if (!isMovementAllowed) animator.SetBool("IsAttacking", true); 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!isMovementAllowed) 
-        { 
-            if (_rigidbody != null) _rigidbody.drag += Time.deltaTime * 5;
-            inputMagnitude -= Time.deltaTime / 5;
-            inputMagnitude = Mathf.Clamp(inputMagnitude, 0, inputMagnitude);
-            vTPController.SetMagnitude(inputMagnitude);
-        }
-
+        if (!isMovementAllowed) if (_rigidbody != null) _rigidbody.drag += Time.deltaTime * 15;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    { 
+    {
+        if (!isMovementAllowed) animator.SetBool("IsAttacking", false);
         _rigidbody.drag = 0;
     }
 
