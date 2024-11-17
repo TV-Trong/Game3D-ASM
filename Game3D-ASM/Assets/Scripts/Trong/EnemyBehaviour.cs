@@ -71,4 +71,13 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         healthSlider.gameObject.SetActive(true);
         healthSlider.value = HP / maxHP;
     }
+    public void StartAttack()
+    {
+        weapon.ReadyToDealDamage();
+    }
+
+    public void EndAttack()
+    {
+        weapon.StopDealingDamage();
+    }
 }
