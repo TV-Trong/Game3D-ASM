@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public float moveSpeed { get; set; }
     [field: SerializeField] public float strength { get; set; }
     [field: SerializeField] public float armor { get; set; }
+    [field: SerializeField] public float poise { get; set; }
     [field: SerializeField] public float critChance { get; set; }
     [field: SerializeField] public float critPower { get; set; }
     [field: SerializeField] public float iFrameTime { get; set; }

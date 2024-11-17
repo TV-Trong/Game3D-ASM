@@ -19,7 +19,6 @@ public class AnimationController : MonoBehaviour
     private void Update()
     {
         timeSinceLastAtk += Time.deltaTime;
-        Debug.Log(timeSinceLastAtk);
     }
 
     private void OnFire()

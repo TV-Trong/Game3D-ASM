@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public float moveSpeed { get; set; }
     [field: SerializeField] public float strength { get; set; }
     [field: SerializeField] public float armor { get; set; }
+    [field: SerializeField] public float poise { get; set; }
     [field: SerializeField] public float critChance { get; set; }
     [field: SerializeField] public float critPower { get; set; }
     [field: SerializeField] public float iFrameTime { get; set; }
@@ -18,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
+  
 
     [SerializeField] EnemyPhysicalWeapon weapon;
     private PlayerBehaviour player;
@@ -70,5 +72,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     {
         healthSlider.gameObject.SetActive(true);
         healthSlider.value = HP / maxHP;
+    }
+    public void StartAttack()
+    {
+        weapon.ReadyToDealDamage();
+    }
+
+    public void EndAttack()
+    {
+        weapon.StopDealingDamage();
     }
 }
