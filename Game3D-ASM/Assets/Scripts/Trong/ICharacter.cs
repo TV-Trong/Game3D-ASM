@@ -11,6 +11,7 @@ public interface ICharacter
     float moveSpeed { get; set; }
     float strength { get; set; }
     float armor {  get; set; }
+    float poise { get; set; }
     float critChance {  get; set; }
     float critPower { get; set; }
     float iFrameTime {  get; set; }
