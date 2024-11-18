@@ -42,9 +42,17 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
     #endregion
 
-    [SerializeField] private EnemyPhysicalWeapon weapon;
+    public enum EnemyClass
+    {
+        Warrior,
+        Mage,
+        Archer
+    }
+
     private PlayerBehaviour player;
     private Animator animator;
+    public bool isPlayerInChaseRange {  get; set; }
+    private bool isPlayerInAttackRange { get; set; }
 
     private void Awake()
     {
@@ -107,6 +115,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
                 Debug.Log("Stagger");
             }
         }
+
+        if (HP <= 0) Die();
     }
 
     public void ResetIFrame()
@@ -129,14 +139,20 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         healthSlider.gameObject.SetActive(true);
         healthSlider.value = HP / maxHP;
     }
-    public void StartAttack()
+
+    public void Die()
     {
-        weapon.ReadyToDealDamage();
+        Debug.Log(gameObject.name + " has Died!");
     }
 
-    public void EndAttack()
+    public void CheckPlayerInChaseRange(bool isTrue)
     {
-        weapon.StopDealingDamage();
+        isPlayerInChaseRange = isTrue;
+    }
+
+    public void CheckPlayerInAttackRange(bool isTrue)
+    {
+        isPlayerInAttackRange = isTrue;
     }
     #endregion
 }

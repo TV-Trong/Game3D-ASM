@@ -51,6 +51,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
                 poise = maxPoise;
             }
         }
+
+        if (HP <= 0) Die();
     }
 
     public void StartAttack()
@@ -82,5 +84,9 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public void UpdateHealthbar()
     {
         throw new System.NotImplementedException();
+    }
+    public void Die()
+    {
+        Debug.Log(gameObject.name + " has Died!");
     }
 }

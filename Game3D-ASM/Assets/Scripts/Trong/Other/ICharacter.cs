@@ -26,5 +26,6 @@ public interface ICharacter
     public void ResetIFrame();
     public void DisplayDamageTaken(float damage, bool isCrit);
     public void UpdateHealthbar();
+    public void Die();
 
 }
