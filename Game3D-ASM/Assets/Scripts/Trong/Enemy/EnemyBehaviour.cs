@@ -40,7 +40,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     {
         Taunt,
         Stagger,
-        DetectPlayer
+        DetectPlayer,
+        DropAggro
     }
     #endregion
 

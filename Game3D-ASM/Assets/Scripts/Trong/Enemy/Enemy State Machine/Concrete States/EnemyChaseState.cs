@@ -13,7 +13,7 @@ public class EnemyChaseState : EnemyState
 
     public override void EnterState()
     {
-        base.EnterState();
+        Debug.Log("Never should have come here!");
     }
 
     public override void ExitState()

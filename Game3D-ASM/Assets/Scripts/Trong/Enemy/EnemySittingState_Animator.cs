@@ -2,56 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateBehaviour : StateMachineBehaviour
+public class EnemySittingState_Animator : StateMachineBehaviour
 {
-    [SerializeField] private bool isAllowedMoving;
-    [SerializeField] private bool isAttack;
-    [SerializeField] private bool isStagger;
-    private float walkTime;
+    private EnemyBehaviour enemyBehaviour;
+    private bool isAggroed;
+    private bool isIdle;
+    private float baseWeight = 1f;
+    private float currentWeight;
+    private float timeWaitUntilChase = 3f;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!isAllowedMoving) animator.SetBool("Idle", false);
-        if (isAttack) animator.SetBool("IsAttacking", true);
-        if (isStagger) 
-        { 
-            animator.SetBool("Idle", true);
-            animator.SetBool("IsStagger", true);
-        }
+        enemyBehaviour = animator.GetComponent<EnemyBehaviour>();
+        isAggroed = animator.GetBool("IsAggroed");
+        isIdle = animator.GetBool("IsIdle");
 
+        if (enemyBehaviour.stateMachine.currentState == enemyBehaviour.idleState)
+        {
+            currentWeight = baseWeight;
+        }
+        else
+        {
+            currentWeight = 0f;
+        }
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (isAllowedMoving)
+        if (isAggroed && !isIdle)
         {
-            float mag = Mathf.Clamp(walkTime, 0f, 0.5f);
-            if (!animator.GetBool("Idle")) 
-            {   
-                walkTime += Time.deltaTime;
-                animator.SetFloat("InputMagnitude", mag);
-            }
-
-            if (walkTime > 5)
+            animator.SetLayerWeight(layerIndex, currentWeight);
+            currentWeight -= Time.deltaTime;
+            if (currentWeight <= 0f)
             {
-                animator.SetBool("Idle", true);
-                walkTime = 0;
+                isIdle = true;
+                animator.SetBool("IsIdle", true);
             }
         }
-        if (animator.GetBool("IsAttacking"))
+        else if (!isAggroed && !isIdle)
         {
-            walkTime = 0;
+            animator.SetLayerWeight(layerIndex, currentWeight);
+            currentWeight += Time.deltaTime;
+            if (currentWeight > baseWeight)
+            {
+                isIdle = true;
+                animator.SetBool("IsIdle", true);
+            }
         }
     }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetBool("IsAttacking") && !isAllowedMoving)
-        {
-            animator.SetBool("IsAttacking", false);
-        }
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine

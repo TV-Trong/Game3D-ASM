@@ -21,12 +21,14 @@ public class EnemySittingState : EnemyState
 
     public override void EnterState()
     {
-        base.EnterState();
+        animator.SetBool("IsIdle", false);
+        animator.SetBool("IsAggroed", false);
+        animator.SetTrigger("StandUp");
     }
 
     public override void ExitState()
     {
-        base.ExitState();
+        animator.SetBool("IsAggroed", true);
     }
 
     public override void FixUpdateState()
