@@ -19,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
+    public float maxPoise { get; set; }
 
     [SerializeField] private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
@@ -29,20 +30,26 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         return (critChance > random);
     }
 
-    public void DealDamage(GameObject target, float power, bool isCrit)
+    public void DealDamage(GameObject target, float healthDamage, float poiseDamage, bool isCrit)
     {
         enemy = target.GetComponent<EnemyBehaviour>();
-        enemy.TakeDamage(power, isCrit);
+        enemy.TakeDamage(healthDamage, poiseDamage, isCrit);
     }
 
-    public void TakeDamage(float damage, bool isCrit)
+    public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
         if (!isImmune)
         {
-            HP -= damage;
-            DisplayDamageTaken(damage, isCrit);
+            HP -= healthDamage;
+            DisplayDamageTaken(healthDamage, isCrit);
             isImmune = true;
             Invoke("ResetIFrame", iFrameTime);
+
+            poise -= poiseDamage;
+            if (poise <= 0)
+            {
+                poise = maxPoise;
+            }
         }
     }
 

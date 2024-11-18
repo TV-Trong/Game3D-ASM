@@ -36,10 +36,22 @@ public class EnemyMovingTest : MonoBehaviour
         {
             idleTime += Time.deltaTime;
             animator.SetFloat("InputMagnitude", 0.5f - idleTime);
-            if (idleTime > 2)
+
+            if (animator.GetBool("IsStagger"))
             {
-                idleTime = 0;
-                animator.SetBool("Idle", false);
+                if (idleTime > 3f)
+                {
+                    idleTime = 0;
+                    animator.SetBool("Idle", false);
+                }
+            }
+            else
+            {
+                if (idleTime > 2)
+                {
+                    idleTime = 0;
+                    animator.SetBool("Idle", false);
+                }
             }
         }
 

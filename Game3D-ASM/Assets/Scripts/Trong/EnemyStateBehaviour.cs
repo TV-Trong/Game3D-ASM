@@ -5,15 +5,20 @@ using UnityEngine;
 public class EnemyStateBehaviour : StateMachineBehaviour
 {
     [SerializeField] private bool isAllowedMoving;
+    [SerializeField] private bool isAttack;
+    [SerializeField] private bool isStagger;
     private float walkTime;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!isAllowedMoving)
+        if (!isAllowedMoving) animator.SetBool("Idle", false);
+        if (isAttack) animator.SetBool("IsAttacking", true);
+        if (isStagger) 
         { 
-            animator.SetBool("Idle", false);
-            animator.SetBool("IsAttacking", true);
+            animator.SetBool("Idle", true);
+            animator.SetBool("IsStagger", true);
         }
+
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine

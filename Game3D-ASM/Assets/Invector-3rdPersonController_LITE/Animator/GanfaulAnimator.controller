@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8458094809746060339
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9f53bf4a402d64497287921334737e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAllowedMoving: 0
+  isAttack: 0
+  isStagger: 1
 --- !u!114 &-6206152064289047006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13,6 +28,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAllowedMoving: 0
+  isAttack: 1
+  isStagger: 0
 --- !u!114 &-2833721897345433356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -26,6 +43,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAllowedMoving: 1
+  isAttack: 0
+  isStagger: 0
 --- !u!1102 &-1684258099116427375
 AnimatorState:
   serializedVersion: 6
@@ -38,7 +57,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3518021936692057458}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -8458094809746060339}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -154,6 +174,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: Idle
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: IsStagger
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -14,6 +14,7 @@ public class EnemyPhysicalWeapon : MonoBehaviour
     private float enemyCritPower;
     private bool isCrit;
     private float finalDamage;
+    private float poiseDamage;
 
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +25,7 @@ public class EnemyPhysicalWeapon : MonoBehaviour
             isCrit = (enemyBehaviour.CheckCritChance(enemyCritChance));
             finalDamage = enemyDamage * sharpness;
             if (isCrit) finalDamage *= enemyCritPower;
-            enemyBehaviour.DealDamage(other.gameObject, finalDamage, isCrit);
+            enemyBehaviour.DealDamage(other.gameObject, finalDamage, 0, isCrit);
         }
     }
 

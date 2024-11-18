@@ -19,14 +19,18 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
-  
+    public float maxPoise { get; set; }
 
     [SerializeField] EnemyPhysicalWeapon weapon;
     private PlayerBehaviour player;
+    private Animator animator;
     private void Awake()
     {
+        animator = GetComponent<Animator>();
+
         healthSlider.gameObject.SetActive(false);
         maxHP = HP;
+        maxPoise = poise;
     }
 
     public bool CheckCritChance(float critChance)
@@ -35,21 +39,30 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         return (critChance > random);
     }
 
-    public void DealDamage(GameObject target, float power, bool isCrit)
+    public void DealDamage(GameObject target, float healthDamage, float poiseDamage,bool isCrit)
     {
         player = target.GetComponent<PlayerBehaviour>();
-        player.TakeDamage(power, isCrit);
+        player.TakeDamage(healthDamage, poiseDamage, isCrit);
     }
 
-    public void TakeDamage(float damage, bool isCrit)
+    public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
         if (!isImmune)
         {
             isImmune = true;
-            HP -= damage;
-            DisplayDamageTaken(damage, isCrit);
+            HP -= healthDamage;
+            DisplayDamageTaken(healthDamage, isCrit);
             UpdateHealthbar();
             Invoke("ResetIFrame", iFrameTime);
+
+            poise -= poiseDamage;
+            Debug.Log(gameObject.name + " poise: " + poise);
+            if (poise <= 0)
+            {
+                poise = maxPoise;
+                animator.SetTrigger("Stagger");
+                Debug.Log("Stagger");
+            }
         }
     }
 

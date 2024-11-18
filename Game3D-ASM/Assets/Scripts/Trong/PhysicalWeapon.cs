@@ -6,6 +6,7 @@ using UnityEngine;
 public class PhysicalWeapon : MonoBehaviour
 {
     [SerializeField] private float sharpness;
+    [SerializeField] private float heaviness;
     [SerializeField] private PlayerBehaviour playerBehaviour;
     [SerializeField] private int piercing;
     [SerializeField] vThirdPersonController vTPC;
@@ -15,6 +16,7 @@ public class PhysicalWeapon : MonoBehaviour
     private float playerCritPower;
     private bool isCrit;
     private float finalDamage;
+    private float poiseDamage;
 
 
     private void OnTriggerStay(Collider other)
@@ -24,8 +26,9 @@ public class PhysicalWeapon : MonoBehaviour
             SetUpPlayerStat();
             isCrit = playerBehaviour.CheckCritChance(playerCritChance);
             finalDamage = playerDamage * sharpness;
+            poiseDamage = sharpness * heaviness;
             if (isCrit) finalDamage *= playerCritPower;
-            playerBehaviour.DealDamage(other.gameObject, finalDamage, isCrit);
+            playerBehaviour.DealDamage(other.gameObject, finalDamage, poiseDamage, isCrit);
         }
     }
 

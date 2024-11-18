@@ -19,8 +19,9 @@ public interface ICharacter
     Transform popupTextTransform { get; set; }
     Slider healthSlider { get; set; }
     float maxHP { get; set; }
-    public void TakeDamage(float damage, bool isCrit);
-    public void DealDamage(GameObject target, float power, bool isCrit);
+    float maxPoise { get; set; }
+    public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit);
+    public void DealDamage(GameObject target, float healthDamage, float poiseDamage, bool isCrit);
     public bool CheckCritChance(float critChance);
     public void ResetIFrame();
     public void DisplayDamageTaken(float damage, bool isCrit);
