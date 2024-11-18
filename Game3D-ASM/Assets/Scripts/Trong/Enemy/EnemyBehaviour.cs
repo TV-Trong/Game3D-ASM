@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour, ICharacter
 {
-    [field:SerializeField] public float HP { get; set; }
+    #region Base Stats Variable
+    [field: SerializeField] public float HP { get; set; }
     [field: SerializeField] public float MP { get; set; }
     [field: SerializeField] public float stamina { get; set; }
     [field: SerializeField] public float moveSpeed { get; set; }
@@ -20,10 +21,31 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+    #endregion
 
-    [SerializeField] EnemyPhysicalWeapon weapon;
+    #region States Variable
+    public EnemyStateMachine stateMachine;
+    public EnemyIdleState idleState;
+    public EnemyChaseState chaseState;
+    public EnemyAttackState attackState;
+    #endregion
+
+    #region Animation Trigger
+    private void AnimationTriggerEnvent(AnimationTriggerType triggerType)
+    {
+        stateMachine.currentState.AnimationTriggerEvent(triggerType);
+    }
+    public enum AnimationTriggerType
+    {
+        Taunt,
+        Stagger
+    }
+    #endregion
+
+    [SerializeField] private EnemyPhysicalWeapon weapon;
     private PlayerBehaviour player;
     private Animator animator;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -31,15 +53,36 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         healthSlider.gameObject.SetActive(false);
         maxHP = HP;
         maxPoise = poise;
+
+        stateMachine = new EnemyStateMachine();
+        idleState = new EnemyIdleState(this, stateMachine);
+        chaseState = new EnemyChaseState(this, stateMachine);
+        attackState = new EnemyAttackState(this, stateMachine);
     }
 
+    private void Start()
+    {
+        stateMachine.Initialize(idleState);
+    }
+
+    private void Update()
+    {
+        stateMachine.currentState.UpdateState();
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.currentState.FixUpdateState();
+    }
+
+    #region Methods
     public bool CheckCritChance(float critChance)
     {
         int random = Random.Range(0, 100);
         return (critChance > random);
     }
 
-    public void DealDamage(GameObject target, float healthDamage, float poiseDamage,bool isCrit)
+    public void DealDamage(GameObject target, float healthDamage, float poiseDamage, bool isCrit)
     {
         player = target.GetComponent<PlayerBehaviour>();
         player.TakeDamage(healthDamage, poiseDamage, isCrit);
@@ -95,4 +138,5 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     {
         weapon.StopDealingDamage();
     }
+    #endregion
 }
