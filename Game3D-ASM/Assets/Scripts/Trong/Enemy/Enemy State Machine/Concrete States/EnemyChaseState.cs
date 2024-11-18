@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class EnemyChaseState : EnemyState
 {
-    public EnemyChaseState(EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(enemyBehaviour, enemyStateMachine)
+    public EnemyChaseState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)
     {
     }
 

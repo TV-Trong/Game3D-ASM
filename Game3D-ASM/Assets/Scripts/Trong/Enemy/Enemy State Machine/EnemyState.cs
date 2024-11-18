@@ -1,12 +1,17 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyState
 {
+    protected GameObject playerObject;
+    protected Animator animator;
     protected EnemyBehaviour enemyBehaviour;
     protected EnemyStateMachine enemyStateMachine;
 
-    public EnemyState (EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine)
+    public EnemyState (GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine)
     {
+        this.playerObject = playerObject;
+        this.animator = animator;
         this.enemyBehaviour = enemyBehaviour;
         this.enemyStateMachine = enemyStateMachine;
     }

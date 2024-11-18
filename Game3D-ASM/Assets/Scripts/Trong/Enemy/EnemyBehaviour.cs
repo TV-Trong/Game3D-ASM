@@ -28,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public EnemyIdleState idleState;
     public EnemyChaseState chaseState;
     public EnemyAttackState attackState;
+    public EnemySittingState sittingState;
     #endregion
 
     #region Animation Trigger
@@ -38,7 +39,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public enum AnimationTriggerType
     {
         Taunt,
-        Stagger
+        Stagger,
+        DetectPlayer
     }
     #endregion
 
@@ -50,12 +52,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
 
     private PlayerBehaviour player;
+    private GameObject playerObject;
     private Animator animator;
     public bool isPlayerInChaseRange {  get; set; }
     private bool isPlayerInAttackRange { get; set; }
 
     private void Awake()
     {
+        playerObject = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
 
         healthSlider.gameObject.SetActive(false);
@@ -63,14 +67,15 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         maxPoise = poise;
 
         stateMachine = new EnemyStateMachine();
-        idleState = new EnemyIdleState(this, stateMachine);
-        chaseState = new EnemyChaseState(this, stateMachine);
-        attackState = new EnemyAttackState(this, stateMachine);
+        idleState = new EnemyIdleState(playerObject, animator, this, stateMachine);
+        chaseState = new EnemyChaseState(playerObject, animator, this, stateMachine);
+        attackState = new EnemyAttackState(playerObject, animator, this, stateMachine);
+        sittingState = new EnemySittingState(playerObject, animator, this, stateMachine);
     }
 
     private void Start()
     {
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(sittingState);
     }
 
     private void Update()

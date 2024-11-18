@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class EnemySittingState : EnemyState
 {
-    public EnemySittingState(EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(enemyBehaviour, enemyStateMachine)
+    public EnemySittingState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)
     {
     }
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
     {
-        base.AnimationTriggerEvent(triggerType);
+        if (triggerType == EnemyBehaviour.AnimationTriggerType.DetectPlayer)
+        {
+            if (enemyBehaviour.isPlayerInChaseRange)
+            {
+                enemyStateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
+        }
     }
 
     public override void EnterState()

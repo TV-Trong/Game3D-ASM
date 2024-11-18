@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyState
 {
-    public EnemyAttackState(EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(enemyBehaviour, enemyStateMachine)
+    public EnemyAttackState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)
     {
-
     }
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
