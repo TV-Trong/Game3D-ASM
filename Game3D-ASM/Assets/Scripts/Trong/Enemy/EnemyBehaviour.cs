@@ -42,7 +42,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         Taunt,
         Stagger,
         DetectPlayer,
-        DropAggro
+        DropAggro,
+        Attack
     }
     #endregion
 
@@ -58,7 +59,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private Animator animator;
     [HideInInspector] public NavMeshAgent agent;
     public bool isPlayerInChaseRange {  get; set; }
-    private bool isPlayerInAttackRange { get; set; }
+    public bool isPlayerInAttackRange { get; set; }
 
     private void Awake()
     {
@@ -163,6 +164,16 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void CheckPlayerInAttackRange(bool isTrue)
     {
         isPlayerInAttackRange = isTrue;
+    }
+
+    public void StartAttack()
+    {
+        //weapon.ReadyToDealDamage();
+    }
+
+    public void EndAttack()
+    {
+        //weapon.StopDealingDamage();
     }
     #endregion
 }

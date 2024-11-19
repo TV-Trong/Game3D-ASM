@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyState
 {
+    private float attackResetTime;
     public EnemyAttackState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)
     {
     }
@@ -13,7 +14,9 @@ public class EnemyAttackState : EnemyState
 
     public override void EnterState()
     {
-        base.EnterState();
+        Debug.Log("You won't leave Skyrim alive!");
+        animator.SetTrigger("Attack");
+        attackResetTime = 4f;
     }
 
     public override void ExitState()
@@ -28,6 +31,7 @@ public class EnemyAttackState : EnemyState
 
     public override void UpdateState()
     {
-        base.UpdateState();
+        attackResetTime -= Time.deltaTime;
+        if (attackResetTime <= 0) enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.chaseState); 
     }
 }

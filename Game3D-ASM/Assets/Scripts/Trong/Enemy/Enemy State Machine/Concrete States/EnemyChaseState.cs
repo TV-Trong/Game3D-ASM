@@ -10,7 +10,13 @@ public class EnemyChaseState : EnemyState
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
     {
-        base.AnimationTriggerEvent(triggerType);
+        if (triggerType == EnemyBehaviour.AnimationTriggerType.Attack)
+        {
+            if (enemyBehaviour.isPlayerInAttackRange)
+            {
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.attackState);
+            }
+        }
     }
 
     public override void EnterState()
