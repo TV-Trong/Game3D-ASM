@@ -9,7 +9,6 @@ public class EnemySittingState_Animator : StateMachineBehaviour
     private bool isIdle;
     private float baseWeight = 1f;
     private float currentWeight;
-    private float timeWaitUntilChase = 3f;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
