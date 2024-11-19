@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AttackRadiusCheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private EnemyBehaviour enemyBehaviour;
+
+    private void Awake()
     {
-        
+        enemyBehaviour = GetComponentInParent<EnemyBehaviour>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInAttackRange(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInAttackRange(false);
     }
 }

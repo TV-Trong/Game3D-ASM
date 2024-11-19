@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour, ICharacter
@@ -51,10 +52,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         Mage,
         Archer
     }
-
+   
     private PlayerBehaviour player;
     private GameObject playerObject;
     private Animator animator;
+    [HideInInspector] public NavMeshAgent agent;
     public bool isPlayerInChaseRange {  get; set; }
     private bool isPlayerInAttackRange { get; set; }
 
@@ -62,6 +64,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     {
         playerObject = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed;
 
         healthSlider.gameObject.SetActive(false);
         maxHP = HP;
