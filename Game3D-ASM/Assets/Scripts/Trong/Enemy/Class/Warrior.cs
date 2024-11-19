@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Warrior : EnemyBehaviour
 {
-    EnemyClass myClass = EnemyClass.Warrior;
+    //EnemyClass myClass = EnemyClass.Warrior;
 }
