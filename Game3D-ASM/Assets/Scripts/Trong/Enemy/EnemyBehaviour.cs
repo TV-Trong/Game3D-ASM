@@ -118,12 +118,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             Invoke("ResetIFrame", iFrameTime);
 
             poise -= poiseDamage;
-            Debug.Log(gameObject.name + " poise: " + poise);
             if (poise <= 0)
             {
                 poise = maxPoise;
-                animator.SetTrigger("Stagger");
-                Debug.Log("Stagger");
+                //animator.SetTrigger("Stagger");
+                //Debug.Log("Stagger");
             }
         }
 

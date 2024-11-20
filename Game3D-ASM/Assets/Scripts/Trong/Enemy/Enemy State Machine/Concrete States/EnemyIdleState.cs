@@ -14,27 +14,25 @@ public class EnemyIdleState : EnemyState
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
     {
-        //if (triggerType == EnemyBehaviour.AnimationTriggerType.DropAggro)
-        //{
-        //    if (!enemyBehaviour.isPlayerInChaseRange)
-        //    {
-        //        playerOutOfRange = true;
-        //    }
-        //}
+        if (triggerType == EnemyBehaviour.AnimationTriggerType.DropAggro)
+        {
+            if (!enemyBehaviour.isPlayerInChaseRange)
+            {
+                playerOutOfRange = true;
+            }
+        }
     }
 
     public override void EnterState()
     {
-        //animator.SetBool("IsIdle", false);
-        //if (!animator.GetBool("IsAggroed")) animator.SetTrigger("StandUp");
-        //animator.SetBool("IsAggroed", true);
-        //currentTimeUntilDropAggro = timeUntilDropAggro;
-        //currentTimeUntilChase = timeUntilChase;
+        animator.SetBool("IsAggroed", true);
+        currentTimeUntilDropAggro = timeUntilDropAggro;
+        currentTimeUntilChase = timeUntilChase;
     }
 
     public override void ExitState()
     {
-
+        
     }
 
     public override void FixUpdateState()
@@ -44,25 +42,32 @@ public class EnemyIdleState : EnemyState
 
     public override void UpdateState()
     {
-        //enemyBehaviour.transform.LookAt(playerObject.transform.position);
+        Debug.Log("Is in standing state");
+        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
-        //if (playerOutOfRange)
-        //{
-        //    if (currentTimeUntilDropAggro > 0)
-        //    {
-        //        currentTimeUntilDropAggro -= Time.deltaTime;
-        //    }
-        //    else
-        //    {
-        //        playerOutOfRange = false;
-        //        currentTimeUntilDropAggro = timeUntilDropAggro;
-        //        enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.sittingState);
-        //    }
-        //}
-        //else
-        //{
-        //    currentTimeUntilChase -= Time.deltaTime;
-        //    if (currentTimeUntilChase <= 0) enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.chaseState);
-        //}
+        enemyBehaviour.transform.LookAt(targetPosition);
+
+        if (playerOutOfRange)
+        {
+            if (currentTimeUntilDropAggro > 0)
+            {
+                currentTimeUntilDropAggro -= Time.deltaTime;
+            }
+            else
+            {
+                playerOutOfRange = false;
+                currentTimeUntilDropAggro = timeUntilDropAggro;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.sittingState);
+            }
+        }
+        else
+        {
+            currentTimeUntilChase -= Time.deltaTime;
+            if (currentTimeUntilChase <= 0)
+            {
+                currentTimeUntilChase = timeUntilChase;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.chaseState);
+            }
+        }
     }
 }
