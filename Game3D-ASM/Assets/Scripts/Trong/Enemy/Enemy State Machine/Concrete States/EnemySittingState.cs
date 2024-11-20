@@ -10,20 +10,20 @@ public class EnemySittingState : EnemyState
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
     {
-        if (triggerType == EnemyBehaviour.AnimationTriggerType.DetectPlayer)
-        {
-            if (enemyBehaviour.isPlayerInChaseRange)
-            {
-                enemyStateMachine.SwitchStage(enemyBehaviour.idleState);
-            }
-        }
+        //if (triggerType == EnemyBehaviour.AnimationTriggerType.DetectPlayer)
+        //{
+        //    if (enemyBehaviour.isPlayerInChaseRange)
+        //    {
+        //        enemyStateMachine.SwitchStage(enemyBehaviour.idleState);
+        //    }
+        //}
     }
 
     public override void EnterState()
     {
-        animator.SetBool("IsIdle", false);
-        animator.SetBool("IsAggroed", false);
-        animator.SetTrigger("StandUp");
+        //animator.SetBool("IsIdle", false);
+        //animator.SetBool("IsAggroed", false);
+        //animator.SetTrigger("StandUp");
     }
 
     public override void ExitState()

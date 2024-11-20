@@ -10,29 +10,29 @@ public class EnemyChaseState : EnemyState
 
     public override void AnimationTriggerEvent(EnemyBehaviour.AnimationTriggerType triggerType)
     {
-        if (triggerType == EnemyBehaviour.AnimationTriggerType.Attack)
-        {
-            if (enemyBehaviour.isPlayerInAttackRange)
-            {
-                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.attackState);
-            }
-        }
+        //if (triggerType == EnemyBehaviour.AnimationTriggerType.Attack)
+        //{
+        //    if (enemyBehaviour.isPlayerInAttackRange)
+        //    {
+        //        enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.attackState);
+        //    }
+        //}
     }
 
     public override void EnterState()
     {
-        Debug.Log("Never should have come here!");
-        if (enemyBehaviour.agent.speed <= 2)
-        {
-            isWalking = true;
-            isRunning = !isWalking;
-        }
-        animator.SetTrigger("DrawSword");
+        //Debug.Log("Never should have come here!");
+        //if (enemyBehaviour.agent.speed <= 2)
+        //{
+        //    isWalking = true;
+        //    isRunning = !isWalking;
+        //}
+        //animator.SetTrigger("DrawSword");
     }
 
     public override void ExitState()
     {
-        animator.SetFloat("InputMagnitude", 0f);
+        //animator.SetFloat("InputMagnitude", 0f);
     }
 
     public override void FixUpdateState()
@@ -42,11 +42,11 @@ public class EnemyChaseState : EnemyState
 
     public override void UpdateState()
     {
-        if (playerObject != null && !animator.GetBool("LockMovement"))
-        {
-            enemyBehaviour.agent.SetDestination(playerObject.transform.position);
-            if (isWalking) animator.SetFloat("InputMagnitude", 0.5f);
-            else animator.SetFloat("InputMagnitude", 1f);
-        }
+        //if (playerObject != null && !animator.GetBool("LockMovement"))
+        //{
+        //    enemyBehaviour.agent.SetDestination(playerObject.transform.position);
+        //    if (isWalking) animator.SetFloat("InputMagnitude", 0.5f);
+        //    else animator.SetFloat("InputMagnitude", 1f);
+        //}
     }
 }
