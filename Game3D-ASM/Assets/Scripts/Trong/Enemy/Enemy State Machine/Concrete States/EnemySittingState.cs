@@ -28,7 +28,7 @@ public class EnemySittingState : EnemyState
 
     public override void ExitState()
     {
-        animator.SetBool("IsAggroed", true);
+        
     }
 
     public override void FixUpdateState()

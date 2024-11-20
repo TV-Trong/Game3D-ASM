@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsMovingAllowed: 0
-  sheathSword: 0
 --- !u!1101 &-7819474781187710996
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -49,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsMovingAllowed: 1
-  sheathSword: 0
 --- !u!1101 &-4228731691234540680
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -19749,7 +19747,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsMovingAllowed: 0
-  sheathSword: 1
 --- !u!114 &5592867036331389437
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19803,4 +19800,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsMovingAllowed: 0
-  sheathSword: 0

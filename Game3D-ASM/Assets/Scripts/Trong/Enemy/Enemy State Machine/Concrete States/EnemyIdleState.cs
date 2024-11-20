@@ -26,7 +26,8 @@ public class EnemyIdleState : EnemyState
     public override void EnterState()
     {
         animator.SetBool("IsIdle", false);
-        animator.SetTrigger("StandUp");
+        if (!animator.GetBool("IsAggroed")) animator.SetTrigger("StandUp");
+        animator.SetBool("IsAggroed", true);
         currentTimeUntilDropAggro = timeUntilDropAggro;
         currentTimeUntilChase = timeUntilChase;
     }

@@ -44715,7 +44715,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 4
     messageOptions: 0
+  - time: 0.16666667
+    functionName: AnimationTriggerEnvent
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 4
+    messageOptions: 0
   - time: 0.33333334
+    functionName: AnimationTriggerEnvent
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 4
+    messageOptions: 0
+  - time: 0.5
     functionName: AnimationTriggerEnvent
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -44729,7 +44743,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 4
     messageOptions: 0
+  - time: 0.8333333
+    functionName: AnimationTriggerEnvent
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 4
+    messageOptions: 0
   - time: 1
+    functionName: AnimationTriggerEnvent
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 4
+    messageOptions: 0
+  - time: 1.1666666
     functionName: AnimationTriggerEnvent
     data: 
     objectReferenceParameter: {fileID: 0}
