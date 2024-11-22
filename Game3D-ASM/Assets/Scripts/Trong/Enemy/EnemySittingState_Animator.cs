@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class EnemySittingState_Animator : StateMachineBehaviour
 {
-    private EnemyBehaviour enemyBehaviour;
-    private bool isAggroed;
-    private bool isIdle;
-    private float baseWeight = 1f;
-    private float currentWeight;
+    //private EnemyBehaviour enemyBehaviour;
+    //private bool isAggroed;
+    //private bool isIdle;
+    //private float baseWeight = 1f;
+    //private float currentWeight;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemyBehaviour = animator.GetComponent<EnemyBehaviour>();
-        isAggroed = animator.GetBool("IsAggroed");
-        isIdle = animator.GetBool("IsIdle");
+        //enemyBehaviour = animator.GetComponent<EnemyBehaviour>();
+        //isAggroed = animator.GetBool("IsAggroed");
+        //isIdle = animator.GetBool("IsIdle");
 
-        if (enemyBehaviour.stateMachine.currentState == enemyBehaviour.idleState)
-        {
-            currentWeight = baseWeight;
-        }
-        else
-        {
-            currentWeight = 0f;
-        }
+        //if (enemyBehaviour.stateMachine.currentState == enemyBehaviour.idleState)
+        //{
+        //    currentWeight = baseWeight;
+        //}
+        //else
+        //{
+        //    currentWeight = 0f;
+        //}
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (isAggroed && !isIdle)
-        {
-            animator.SetLayerWeight(layerIndex, currentWeight);
-            currentWeight -= Time.deltaTime;
-            if (currentWeight <= 0f)
-            {
-                isIdle = true;
-                animator.SetBool("IsIdle", true);
-            }
-        }
-        else if (!isAggroed && !isIdle)
-        {
-            animator.SetLayerWeight(layerIndex, currentWeight);
-            currentWeight += Time.deltaTime;
-            if (currentWeight > baseWeight)
-            {
-                isIdle = true;
-                animator.SetBool("IsIdle", true);
-            }
-        }
+        //if (isAggroed && !isIdle)
+        //{
+        //    animator.SetLayerWeight(layerIndex, currentWeight);
+        //    currentWeight -= Time.deltaTime;
+        //    if (currentWeight <= 0f)
+        //    {
+        //        isIdle = true;
+        //        animator.SetBool("IsIdle", true);
+        //    }
+        //}
+        //else if (!isAggroed && !isIdle)
+        //{
+        //    animator.SetLayerWeight(layerIndex, currentWeight);
+        //    currentWeight += Time.deltaTime;
+        //    if (currentWeight > baseWeight)
+        //    {
+        //        isIdle = true;
+        //        animator.SetBool("IsIdle", true);
+        //    }
+        //}
     }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
