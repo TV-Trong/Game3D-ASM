@@ -49,7 +49,7 @@ public class EnemyChaseState : EnemyState
         }
 
         timeSinceLastAttack += Time.deltaTime;
-        if (timeSinceLastAttack > 5f)
+        if (timeSinceLastAttack > 15f)
         {
             Debug.Log("Come back here scum!");
             animator.SetBool("IsChasing", false);

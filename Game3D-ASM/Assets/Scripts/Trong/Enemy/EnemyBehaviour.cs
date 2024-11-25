@@ -60,6 +60,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [HideInInspector] public NavMeshAgent agent;
     public bool isPlayerInChaseRange {  get; set; }
     public bool isPlayerInAttackRange { get; set; }
+    [SerializeField] private EnemyPhysicalWeapon weapon;
 
     private void Awake()
     {
@@ -167,12 +168,12 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void StartAttack()
     {
-        //weapon.ReadyToDealDamage();
+        weapon.ReadyToDealDamage();
     }
 
     public void EndAttack()
     {
-        //weapon.StopDealingDamage();
+        weapon.StopDealingDamage();
     }
     #endregion
 }
