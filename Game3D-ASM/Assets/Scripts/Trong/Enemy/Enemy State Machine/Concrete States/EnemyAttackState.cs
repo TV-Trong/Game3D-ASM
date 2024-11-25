@@ -13,7 +13,7 @@ public class EnemyAttackState : EnemyState
         {
             if (enemyBehaviour.isPlayerInAttackRange)
             {
-                if (timeSinceLastAttack > 4)
+                if (timeSinceLastAttack > 7)
                 {
                     animator.SetTrigger("Attack");
                     timeSinceLastAttack = 0f;
@@ -54,7 +54,7 @@ public class EnemyAttackState : EnemyState
         }
 
         timeSinceLastAttack += Time.deltaTime;
-        if (timeSinceLastAttack > 5f)
+        if (timeSinceLastAttack > 15f)
         {
             Debug.Log("Come back here scum!");
             animator.SetBool("IsChasing", false);
