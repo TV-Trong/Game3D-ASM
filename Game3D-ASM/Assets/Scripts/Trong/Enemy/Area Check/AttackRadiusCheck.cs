@@ -12,11 +12,11 @@ public class AttackRadiusCheck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInAttackRange(true);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInAttackRange(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInAttackRange(false);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInAttackRange(false);
     }
 }

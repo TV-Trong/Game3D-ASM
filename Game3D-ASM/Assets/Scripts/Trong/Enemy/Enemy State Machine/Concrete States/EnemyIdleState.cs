@@ -16,7 +16,7 @@ public class EnemyIdleState : EnemyState
     {
         if (triggerType == EnemyBehaviour.AnimationTriggerType.DropAggro)
         {
-            if (!enemyBehaviour.isPlayerInChaseRange)
+            if (!enemyBehaviour.isPlayerInAggroRange)
             {
                 playerOutOfRange = true;
             }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseAreaCheck : MonoBehaviour
+public class AggroAreaCheck : MonoBehaviour
 {
     private EnemyBehaviour enemyBehaviour;
 
@@ -12,11 +12,11 @@ public class ChaseAreaCheck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInChaseRange(true);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInAggroRange(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInChaseRange(false);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInAggroRange(false);
     }
 }

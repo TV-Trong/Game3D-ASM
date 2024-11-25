@@ -58,8 +58,9 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private GameObject playerObject;
     private Animator animator;
     [HideInInspector] public NavMeshAgent agent;
-    public bool isPlayerInChaseRange {  get; set; }
+    public bool isPlayerInAggroRange {  get; set; }
     public bool isPlayerInAttackRange { get; set; }
+    public bool isPlayerInChaseRange { get; set; }
     [SerializeField] private EnemyPhysicalWeapon weapon;
 
     private void Awake()
@@ -156,14 +157,19 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         Debug.Log(gameObject.name + " has Died!");
     }
 
-    public void CheckPlayerInChaseRange(bool isTrue)
+    public void SetPlayerInAggroRange(bool isTrue)
     {
-        isPlayerInChaseRange = isTrue;
+        isPlayerInAggroRange = isTrue;
     }
 
-    public void CheckPlayerInAttackRange(bool isTrue)
+    public void SetPlayerInAttackRange(bool isTrue)
     {
         isPlayerInAttackRange = isTrue;
+    }
+
+    public void SetPlayerInChaseRange(bool isTrue)
+    {
+        isPlayerInChaseRange = isTrue;
     }
 
     public void StartAttack()

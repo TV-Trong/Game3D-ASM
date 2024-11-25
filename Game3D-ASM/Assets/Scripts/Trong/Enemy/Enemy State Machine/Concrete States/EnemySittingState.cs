@@ -12,7 +12,7 @@ public class EnemySittingState : EnemyState
     {
         if (triggerType == EnemyBehaviour.AnimationTriggerType.DetectPlayer)
         {
-            if (enemyBehaviour.isPlayerInChaseRange)
+            if (enemyBehaviour.isPlayerInAggroRange)
             {
                 enemyStateMachine.SwitchStage(enemyBehaviour.idleState);
             }

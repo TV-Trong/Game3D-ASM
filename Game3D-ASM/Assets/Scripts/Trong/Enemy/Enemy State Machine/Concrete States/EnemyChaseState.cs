@@ -16,6 +16,16 @@ public class EnemyChaseState : EnemyState
                 enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.attackState);
             }
         }
+        if (triggerType == EnemyBehaviour.AnimationTriggerType.DropAggro)
+        {
+            if (!enemyBehaviour.isPlayerInChaseRange)
+            {
+                Debug.Log("Come back here scum!");
+                animator.SetBool("IsChasing", false);
+                enemyBehaviour.agent.isStopped = true;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
+        }
     }
 
     public override void EnterState()
