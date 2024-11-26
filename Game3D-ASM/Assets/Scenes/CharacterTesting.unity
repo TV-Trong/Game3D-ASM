@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0f8d36bf0a454fa45897f2fcc0ea0506, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 71fc7fc34a6b7ab4884aa92c6b18d879, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2927,7 +2927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21dd2b0f9f4c4334a8c913b80b62efa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBehaviour: {fileID: 0}
 --- !u!1 &939937039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1521298750}
   - component: {fileID: 1521298749}
+  - component: {fileID: 1521298751}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -5229,6 +5229,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: -30, z: 0}
+--- !u!114 &1521298751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521298748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1525845982
 GameObject:
   m_ObjectHideFlags: 0
@@ -22574,7 +22597,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
