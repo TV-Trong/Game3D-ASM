@@ -47,13 +47,22 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
     #endregion
 
+    #region Enum
     public enum EnemyClass
     {
         Warrior,
         Mage,
         Archer
     }
-   
+    public enum EnemyType
+    {
+        Station,
+        Patrolling
+    }
+    public EnemyType Action;
+    #endregion
+
+
     private PlayerBehaviour player;
     private GameObject playerObject;
     private Animator animator;
@@ -61,6 +70,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public bool isPlayerInAggroRange {  get; set; }
     public bool isPlayerInAttackRange { get; set; }
     public bool isPlayerInChaseRange { get; set; }
+    public float patrolArea { get; set; } = 25f;
     [SerializeField] private EnemyPhysicalWeapon weapon;
 
     private void Awake()
@@ -155,6 +165,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void Die()
     {
         Debug.Log(gameObject.name + " has Died!");
+        gameObject.SetActive(false);
     }
 
     public void SetPlayerInAggroRange(bool isTrue)

@@ -32,6 +32,7 @@ public class EnemyChaseState : EnemyState
     {
         Debug.Log("Never should have come here!");
         animator.SetBool("IsChasing", true);
+        animator.SetBool("IsIdle", false);
         timeSinceLastAttack = 0f;
         enemyBehaviour.agent.isStopped = false;
     }
