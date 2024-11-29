@@ -12,11 +12,11 @@ public class ChaseAreaCheck : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInChaseRange(true);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInChaseRange(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) enemyBehaviour.CheckPlayerInChaseRange(false);
+        if (other.CompareTag("Player")) enemyBehaviour.SetPlayerInChaseRange(false);
     }
 }

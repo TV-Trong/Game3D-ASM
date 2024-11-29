@@ -47,19 +47,31 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
     #endregion
 
+    #region Enum
     public enum EnemyClass
     {
         Warrior,
         Mage,
         Archer
     }
-   
+    public enum EnemyType
+    {
+        Station,
+        Patrolling
+    }
+    public EnemyType Action;
+    #endregion
+
+
     private PlayerBehaviour player;
     private GameObject playerObject;
     private Animator animator;
     [HideInInspector] public NavMeshAgent agent;
-    public bool isPlayerInChaseRange {  get; set; }
+    public bool isPlayerInAggroRange {  get; set; }
     public bool isPlayerInAttackRange { get; set; }
+    public bool isPlayerInChaseRange { get; set; }
+    public float patrolArea { get; set; } = 25f;
+    [SerializeField] private EnemyPhysicalWeapon weapon;
 
     private void Awake()
     {
@@ -118,12 +130,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             Invoke("ResetIFrame", iFrameTime);
 
             poise -= poiseDamage;
-            Debug.Log(gameObject.name + " poise: " + poise);
             if (poise <= 0)
             {
                 poise = maxPoise;
-                animator.SetTrigger("Stagger");
-                Debug.Log("Stagger");
+                //animator.SetTrigger("Stagger");
+                //Debug.Log("Stagger");
             }
         }
 
@@ -154,26 +165,32 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void Die()
     {
         Debug.Log(gameObject.name + " has Died!");
+        gameObject.SetActive(false);
     }
 
-    public void CheckPlayerInChaseRange(bool isTrue)
+    public void SetPlayerInAggroRange(bool isTrue)
     {
-        isPlayerInChaseRange = isTrue;
+        isPlayerInAggroRange = isTrue;
     }
 
-    public void CheckPlayerInAttackRange(bool isTrue)
+    public void SetPlayerInAttackRange(bool isTrue)
     {
         isPlayerInAttackRange = isTrue;
     }
 
+    public void SetPlayerInChaseRange(bool isTrue)
+    {
+        isPlayerInChaseRange = isTrue;
+    }
+
     public void StartAttack()
     {
-        //weapon.ReadyToDealDamage();
+        weapon.ReadyToDealDamage();
     }
 
     public void EndAttack()
     {
-        //weapon.StopDealingDamage();
+        weapon.StopDealingDamage();
     }
     #endregion
 }

@@ -10,6 +10,9 @@ public class ActionController : MonoBehaviour
     private InputAction customAction;
     private CursorController cursorControl;
     private bool isMenuOpen;
+    [Header("Menu")]
+    [SerializeField] private GameObject menuGameObject;
+
 
     private void Awake()
     {
@@ -28,5 +31,30 @@ public class ActionController : MonoBehaviour
         cursorControl.enabled = isMenuOpen;
         isMenuOpen = !isMenuOpen;
         vTPCamera.lockCamera = isMenuOpen;
+        menuGameObject.SetActive(true);
+        Time.timeScale = 0;
+        customAction.performed -= OnOpenMenu;
+        customAction.performed += OnCloseMenu;
+    }
+
+    public void OnCloseMenu()
+    {
+        cursorControl.enabled = isMenuOpen;
+        isMenuOpen = !isMenuOpen;
+        vTPCamera.lockCamera = isMenuOpen;
+        menuGameObject.SetActive(false);
+        Time.timeScale = 1;
+        customAction.performed -= OnCloseMenu;
+        customAction.performed += OnOpenMenu;
+    }
+    private void OnCloseMenu(InputAction.CallbackContext context)
+    {
+        cursorControl.enabled = isMenuOpen;
+        isMenuOpen = !isMenuOpen;
+        vTPCamera.lockCamera = isMenuOpen;
+        menuGameObject.SetActive(false);
+        Time.timeScale = 1;
+        customAction.performed -= OnCloseMenu;
+        customAction.performed += OnOpenMenu;
     }
 }

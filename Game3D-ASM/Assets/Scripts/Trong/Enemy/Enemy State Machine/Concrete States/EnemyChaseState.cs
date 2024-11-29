@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyState
 {
-    private bool isRunning;
-    private bool isWalking;
+    private float timeSinceLastAttack;
     public EnemyChaseState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)
     {
     }
@@ -17,22 +16,30 @@ public class EnemyChaseState : EnemyState
                 enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.attackState);
             }
         }
+        if (triggerType == EnemyBehaviour.AnimationTriggerType.DropAggro)
+        {
+            if (!enemyBehaviour.isPlayerInChaseRange)
+            {
+                Debug.Log("Come back here scum!");
+                animator.SetBool("IsChasing", false);
+                enemyBehaviour.agent.isStopped = true;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
+        }
     }
 
     public override void EnterState()
     {
         Debug.Log("Never should have come here!");
-        if (enemyBehaviour.agent.speed <= 2)
-        {
-            isWalking = true;
-            isRunning = !isWalking;
-        }
-        animator.SetTrigger("DrawSword");
+        animator.SetBool("IsChasing", true);
+        animator.SetBool("IsIdle", false);
+        timeSinceLastAttack = 0f;
+        enemyBehaviour.agent.isStopped = false;
     }
 
     public override void ExitState()
     {
-        animator.SetFloat("InputMagnitude", 0f);
+       
     }
 
     public override void FixUpdateState()
@@ -42,11 +49,23 @@ public class EnemyChaseState : EnemyState
 
     public override void UpdateState()
     {
+        Debug.Log("Is in chase state");
+        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
+
+        enemyBehaviour.transform.LookAt(targetPosition);
+
         if (playerObject != null && !animator.GetBool("LockMovement"))
         {
             enemyBehaviour.agent.SetDestination(playerObject.transform.position);
-            if (isWalking) animator.SetFloat("InputMagnitude", 0.5f);
-            else animator.SetFloat("InputMagnitude", 1f);
+        }
+
+        timeSinceLastAttack += Time.deltaTime;
+        if (timeSinceLastAttack > 15f)
+        {
+            Debug.Log("Come back here scum!");
+            animator.SetBool("IsChasing", false);
+            enemyBehaviour.agent.isStopped = true;
+            enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
         }
     }
 }
