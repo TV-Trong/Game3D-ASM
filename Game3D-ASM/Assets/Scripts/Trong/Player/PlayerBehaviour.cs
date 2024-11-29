@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour, ICharacter
 {
+    #region Base Stat Variables
     [field: SerializeField] public float HP { get; set; }
     [field: SerializeField] public float MP { get; set; }
     [field: SerializeField] public float stamina { get; set; }
@@ -20,10 +21,38 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+    #endregion
 
-    [SerializeField] private PhysicalWeapon weapon;
+
+    public GameObject swordIdle;
+    public GameObject swordOnCombat;
+    [HideInInspector] public bool isOnCombatStage;
+    private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
 
+    #region State Machine
+    public PlayerStateMachine playerStateMachine;
+    public PlayerIdleState idleState;
+    public PlayerCombatState combatState;
+    #endregion
+
+    private void Awake()
+    {
+        Animator animator = GetComponent<Animator>();
+        playerStateMachine = new PlayerStateMachine();
+        idleState = new PlayerIdleState(playerStateMachine, this, gameObject, animator, swordIdle, swordOnCombat);
+        combatState = new PlayerCombatState(playerStateMachine, this, gameObject, animator, swordIdle, swordOnCombat);
+        weapon = swordOnCombat.GetComponent<PhysicalWeapon>();
+
+        playerStateMachine.Initialize(idleState);
+    }
+
+    private void Update()
+    {
+        playerStateMachine.currentState.Update();
+    }
+
+    #region Methods
     public bool CheckCritChance(float critChance)
     {
         int random = Random.Range(0, 100);
@@ -89,4 +118,5 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         Debug.Log(gameObject.name + " has Died!");
     }
+    #endregion
 }
