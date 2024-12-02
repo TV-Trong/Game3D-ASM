@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 5;
     private PlayerBehaviour mPlayerBehavior;
     private BoxCollider mCollision;
 
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     void ChasingPlayer()
     {
-        this.transform.position = Vector3.MoveTowards(this.transform.position, mPlayerBehavior.transform.position, speed);   
+        this.transform.position = Vector3.MoveTowards(this.transform.position, mPlayerBehavior.transform.position, speed * Time.deltaTime);   
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,12 +38,6 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Touch player");
             mPlayerBehavior.TakeDamage(.5f, 0, false);
-            this.gameObject.SetActive(false);
-        }
-
-        if(other.CompareTag("End"))
-        {
-            Debug.Log("End");
             this.gameObject.SetActive(false);
         }
     }
