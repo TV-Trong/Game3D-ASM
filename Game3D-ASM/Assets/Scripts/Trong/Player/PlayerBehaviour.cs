@@ -119,5 +119,9 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         Debug.Log(gameObject.name + " has Died!");
     }
+    public void ParryEnemy(EnemyBehaviour enemyBehaviour)
+    {
+        enemyBehaviour.GetParried();
+    }
     #endregion
 }

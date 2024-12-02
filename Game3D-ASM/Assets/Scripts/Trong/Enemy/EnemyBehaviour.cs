@@ -228,5 +228,12 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         slashObject3.transform.rotation = originTransform3.rotation * targetTransform.rotation;
         slashEffect3.Play();
     }
+    public void GetParried()
+    {
+        animator.SetTrigger("GetParried");
+        slashEffect1.Stop();
+        slashEffect2.Stop();
+        slashEffect3.Stop();
+    }
     #endregion
 }

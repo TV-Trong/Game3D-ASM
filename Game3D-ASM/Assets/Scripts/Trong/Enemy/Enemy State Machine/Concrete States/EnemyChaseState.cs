@@ -31,6 +31,7 @@ public class EnemyChaseState : EnemyState
     {
         animator.SetBool("IsChasing", true);
         animator.SetBool("IsIdle", false);
+        animator.SetTrigger("DrawSword");
         timeSinceLastAttack = 0f;
         enemyBehaviour.agent.isStopped = false;
     }

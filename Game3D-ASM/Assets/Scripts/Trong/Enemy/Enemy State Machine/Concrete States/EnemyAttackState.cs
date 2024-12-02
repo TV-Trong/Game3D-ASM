@@ -13,7 +13,7 @@ public class EnemyAttackState : EnemyState
         {
             if (enemyBehaviour.isPlayerInAttackRange)
             {
-                if (timeSinceLastAttack > 7)
+                if (timeSinceLastAttack > 4)
                 {
                     animator.SetTrigger("Attack");
                     timeSinceLastAttack = 0f;
@@ -48,6 +48,14 @@ public class EnemyAttackState : EnemyState
         if (playerObject != null && !animator.GetBool("LockMovement"))
         {
             enemyBehaviour.agent.SetDestination(playerObject.transform.position);
+            if (enemyBehaviour.isPlayerInAttackRange)
+            {
+                enemyBehaviour.agent.speed = .7f;
+            }
+            else
+            {
+                enemyBehaviour.agent.speed = 1.5f;
+            }
             animator.SetBool("IsChasing", true);
         }
 

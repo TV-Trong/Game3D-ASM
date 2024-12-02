@@ -13,7 +13,6 @@ public class ParryZone : MonoBehaviour
             {
                 playerBehaviour.isImmune = true;
             }
-            Debug.Log(true);
         }
     }
 }
