@@ -25,7 +25,7 @@ public class AnimationController : MonoBehaviour
 
     private void OnFire()
     {
-        if (playerBehaviour.isOnCombatStage)
+        if (playerBehaviour.isOnCombatStage && !ActionController.isGameStop)
         {
             if (timeSinceLastAtk > attackResetTime) attackIndex = 0;
             if (!isOnBufferTime)
