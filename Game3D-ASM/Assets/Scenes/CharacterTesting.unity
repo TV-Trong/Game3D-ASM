@@ -5802,7 +5802,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -15922,7 +15922,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -38323,7 +38323,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -53528,7 +53528,7 @@ Transform:
   m_GameObject: {fileID: 793518611}
   serializedVersion: 2
   m_LocalRotation: {x: 0.029320743, y: 0.14798051, z: 0.025099115, w: 0.9882369}
-  m_LocalPosition: {x: -0.00233458, y: 0.17913604, z: -0.121582046}
+  m_LocalPosition: {x: -0.0023341032, y: 0.17913604, z: -0.121582046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63143,7 +63143,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -78722,7 +78722,7 @@ GameObject:
   - component: {fileID: 1623286341}
   - component: {fileID: 1623286342}
   m_Layer: 0
-  m_Name: Ganfaul Sitting
+  m_Name: Ganfaul Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78808,7 +78808,7 @@ Transform:
   m_GameObject: {fileID: 1623286333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 30, y: 1.54, z: -23}
+  m_LocalPosition: {x: 31, y: 1.54, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78854,7 +78854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a60824207e0da749ba76a2e7f981240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HP>k__BackingField: 60
+  <HP>k__BackingField: 1500
   <MP>k__BackingField: 100
   <stamina>k__BackingField: 1000
   <moveSpeed>k__BackingField: 1.5
@@ -110469,7 +110469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904334917}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16796851, y: 0.8645674, z: 0.47359413, w: -0.0042965487}
+  m_LocalRotation: {x: -0.48185062, y: -0.041651346, z: 0.14256541, w: 0.8635742}
   m_LocalPosition: {x: 0.035381794, y: -0.12881517, z: -0.8751736}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -110477,7 +110477,7 @@ Transform:
   - {fileID: 146325653}
   - {fileID: 225526489}
   m_Father: {fileID: 689894929}
-  m_LocalEulerAnglesHint: {x: -55.12, y: 164.62, z: 30.051}
+  m_LocalEulerAnglesHint: {x: -55.12, y: -21.472, z: 30.051}
 --- !u!1 &1906509439
 GameObject:
   m_ObjectHideFlags: 0
@@ -117612,7 +117612,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -131184,7 +131184,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -137245,7 +137245,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -140990,7 +140990,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0

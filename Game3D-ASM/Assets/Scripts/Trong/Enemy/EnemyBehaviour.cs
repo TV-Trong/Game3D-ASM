@@ -225,7 +225,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void Slash3()
     {
         slashObject3.transform.position = targetTransform.position;
-        slashObject3.transform.rotation = targetTransform.rotation * originTransform3.rotation;
+        slashObject3.transform.rotation = originTransform3.rotation * targetTransform.rotation;
         slashEffect3.Play();
     }
     #endregion

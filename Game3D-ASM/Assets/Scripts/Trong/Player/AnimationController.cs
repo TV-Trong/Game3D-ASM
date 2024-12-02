@@ -21,6 +21,7 @@ public class AnimationController : MonoBehaviour
     private void Update()
     {
         timeSinceLastAtk += Time.deltaTime;
+        Parry();
     }
 
     private void OnFire()
@@ -43,6 +44,20 @@ public class AnimationController : MonoBehaviour
             if (attackIndex > 2) attackIndex = 0;
         }
         
+    }
+
+    private void Parry()
+    {
+        if (Input.GetMouseButtonDown(1) && playerBehaviour.isOnCombatStage)
+        {
+            animator.SetBool("Parry", true);
+            playerBehaviour.isImmune = true;
+        }
+        if (Input.GetMouseButtonUp(1) && playerBehaviour.isOnCombatStage)
+        {
+            animator.SetBool("Parry", false);
+            playerBehaviour.isImmune = false;
+        }
     }
     private void SetAttackable()
     {
