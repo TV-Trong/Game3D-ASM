@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - conca
+  - spawn
+  - despawn
   layers:
   - Default
   - TransparentFX
