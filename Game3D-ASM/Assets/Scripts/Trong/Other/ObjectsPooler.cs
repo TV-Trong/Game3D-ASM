@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +29,8 @@ public class ObjectsPooler : MonoBehaviour
     {
         for (int i = 0; i < objectPools[index].listObject.Count; i++)
         {
-            if (!objectPools[index].listObject[i].activeInHierarchy) return objectPools[index].listObject[i];
+            if (!objectPools[index].listObject[i].activeInHierarchy) 
+                return objectPools[index].listObject[i];
         }
         return null;
     }
@@ -42,5 +42,6 @@ public class ObjectPool
     public GameObject objectsPrefab;
     public int maxObjectsNumber;
     public Transform objectsParent;
-    [HideInInspector] public List<GameObject> listObject = new List<GameObject>();
+    [HideInInspector] 
+    public List<GameObject> listObject = new List<GameObject>();
 }

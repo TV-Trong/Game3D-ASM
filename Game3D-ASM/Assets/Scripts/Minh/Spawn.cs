@@ -1,18 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject prefab;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        StartCoroutine(Spawnn(10));
+    }
+
+    IEnumerator Spawnn(float t)
+    {
+        yield return new WaitForSecondsRealtime(t);
+        Instantiate(prefab, this.transform.position, this.transform.rotation);
     }
 }
