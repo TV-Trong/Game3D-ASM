@@ -5,14 +5,17 @@ public class Spawn : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
 
-    void Update()
+    void Start()
     {
-        StartCoroutine(Spawnn(10));
+        StartCoroutine(SpawnRoutine(1));
     }
 
-    IEnumerator Spawnn(float t)
+    IEnumerator SpawnRoutine(float t)
     {
-        yield return new WaitForSecondsRealtime(t);
-        Instantiate(prefab, this.transform.position, this.transform.rotation);
+        while (true)
+        {
+            Instantiate(prefab, new Vector3(Random.Range(68.7f, 417.4f), 1, Random.Range(97, 355)), transform.rotation);
+            yield return new WaitForSecondsRealtime(t);
+        }
     }
 }
