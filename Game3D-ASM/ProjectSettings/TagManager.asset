@@ -9,6 +9,7 @@ TagManager:
   - conca
   - spawn
   - despawn
+  - ParryZone
   layers:
   - Default
   - TransparentFX

@@ -27,6 +27,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public GameObject swordIdle;
     public GameObject swordOnCombat;
     [HideInInspector] public bool isOnCombatStage;
+    [HideInInspector] public bool isParrying;
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
 

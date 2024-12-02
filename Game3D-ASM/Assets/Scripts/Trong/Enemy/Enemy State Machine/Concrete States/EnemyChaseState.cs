@@ -20,7 +20,6 @@ public class EnemyChaseState : EnemyState
         {
             if (!enemyBehaviour.isPlayerInChaseRange)
             {
-                Debug.Log("Come back here scum!");
                 animator.SetBool("IsChasing", false);
                 enemyBehaviour.agent.isStopped = true;
                 enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
@@ -30,7 +29,6 @@ public class EnemyChaseState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Never should have come here!");
         animator.SetBool("IsChasing", true);
         animator.SetBool("IsIdle", false);
         timeSinceLastAttack = 0f;
@@ -49,7 +47,6 @@ public class EnemyChaseState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Is in chase state");
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
         enemyBehaviour.transform.LookAt(targetPosition);
@@ -62,7 +59,6 @@ public class EnemyChaseState : EnemyState
         timeSinceLastAttack += Time.deltaTime;
         if (timeSinceLastAttack > 15f)
         {
-            Debug.Log("Come back here scum!");
             animator.SetBool("IsChasing", false);
             enemyBehaviour.agent.isStopped = true;
             enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);

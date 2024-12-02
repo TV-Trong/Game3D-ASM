@@ -42,7 +42,6 @@ public class EnemyIdleState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Is in standing state");
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
         enemyBehaviour.transform.LookAt(targetPosition);

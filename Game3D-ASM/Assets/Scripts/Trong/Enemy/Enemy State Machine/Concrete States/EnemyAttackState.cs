@@ -24,7 +24,6 @@ public class EnemyAttackState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("You won't leave Skyrim alive!");
         animator.SetTrigger("Attack");
         timeSinceLastAttack = 0f;
         enemyBehaviour.agent.isStopped = false;
@@ -42,7 +41,6 @@ public class EnemyAttackState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Is in attack state");
         Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
         enemyBehaviour.transform.LookAt(targetPosition);
@@ -56,7 +54,6 @@ public class EnemyAttackState : EnemyState
         timeSinceLastAttack += Time.deltaTime;
         if (timeSinceLastAttack > 15f)
         {
-            Debug.Log("Come back here scum!");
             animator.SetBool("IsChasing", false);
             enemyBehaviour.agent.isStopped = true;
             enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
