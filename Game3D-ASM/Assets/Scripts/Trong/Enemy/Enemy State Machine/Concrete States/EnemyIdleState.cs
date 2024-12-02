@@ -5,7 +5,7 @@ public class EnemyIdleState : EnemyState
 {
     private float timeUntilDropAggro = 3f;
     private float currentTimeUntilDropAggro;
-    private float timeUntilChase = 3f;
+    private float timeUntilChase = 1.5f;
     private float currentTimeUntilChase;
     private bool playerOutOfRange;
     public EnemyIdleState(GameObject playerObject, Animator animator, EnemyBehaviour enemyBehaviour, EnemyStateMachine enemyStateMachine) : base(playerObject, animator, enemyBehaviour, enemyStateMachine)

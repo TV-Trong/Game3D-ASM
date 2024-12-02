@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ActionController : MonoBehaviour
 {
+    public static bool isGameStop;
     [SerializeField] private string openMenuKey = "escape";
     [SerializeField] private vThirdPersonCamera vTPCamera;
     private InputAction customAction;
@@ -28,6 +29,7 @@ public class ActionController : MonoBehaviour
 
     private void OnOpenMenu(InputAction.CallbackContext context)
     {
+        isGameStop = true;
         cursorControl.enabled = isMenuOpen;
         isMenuOpen = !isMenuOpen;
         vTPCamera.lockCamera = isMenuOpen;
@@ -39,6 +41,7 @@ public class ActionController : MonoBehaviour
 
     public void OnCloseMenu()
     {
+        isGameStop = false;
         cursorControl.enabled = isMenuOpen;
         isMenuOpen = !isMenuOpen;
         vTPCamera.lockCamera = isMenuOpen;
@@ -49,6 +52,7 @@ public class ActionController : MonoBehaviour
     }
     private void OnCloseMenu(InputAction.CallbackContext context)
     {
+        isGameStop = false;
         cursorControl.enabled = isMenuOpen;
         isMenuOpen = !isMenuOpen;
         vTPCamera.lockCamera = isMenuOpen;

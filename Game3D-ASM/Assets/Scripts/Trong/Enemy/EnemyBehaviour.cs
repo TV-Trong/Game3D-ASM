@@ -22,6 +22,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+
+    public float timeTillAggro = 3f;
     #endregion
 
     #region States Variable
