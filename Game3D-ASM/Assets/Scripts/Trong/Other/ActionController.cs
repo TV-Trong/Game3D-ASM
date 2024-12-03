@@ -18,6 +18,7 @@ public class ActionController : MonoBehaviour
     private void Awake()
     {
         cursorControl = GetComponent<CursorController>();
+        QualitySettings.pixelLightCount = 100;
     }
     private void Start()
     {
