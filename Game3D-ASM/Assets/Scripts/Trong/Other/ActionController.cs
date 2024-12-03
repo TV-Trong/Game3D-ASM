@@ -50,6 +50,10 @@ public class ActionController : MonoBehaviour
         customAction.performed -= OnCloseMenu;
         customAction.performed += OnOpenMenu;
     }
+    public void RemoveAllBinding()
+    {
+        customAction.performed -= OnOpenMenu;
+    }
     private void OnCloseMenu(InputAction.CallbackContext context)
     {
         isGameStop = false;
