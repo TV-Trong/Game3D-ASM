@@ -8,10 +8,12 @@ public class SlashEffect : MonoBehaviour
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem slashEffect3;
     [SerializeField] private ParticleSystem slashEffect4;
+    [SerializeField] private ParticleSystem counterEffect;
     [SerializeField] private GameObject slashObject;
     [SerializeField] private GameObject slashObject2;
     [SerializeField] private GameObject slashObject3;
     [SerializeField] private GameObject slashObject4;
+    [SerializeField] private GameObject counterEffectObject;
     private Transform originTransform;
     private Transform originTransform2;
     private Transform originTransform3;
@@ -23,7 +25,6 @@ public class SlashEffect : MonoBehaviour
         originTransform = slashObject.transform;
         originTransform2 = slashObject2.transform;
         originTransform3 = slashObject3.transform;
-
         originTransform4 = slashObject4.transform;
     }
     public void PlaySlash1()
@@ -49,6 +50,11 @@ public class SlashEffect : MonoBehaviour
         slashObject4.transform.position = targetTransform.position;
         slashObject4.transform.rotation = transform.rotation * originTransform4.rotation;
         slashEffect4.Play();
+    }
+    public void PlayCounterEffect()
+    {
+        counterEffectObject.transform.position = targetTransform.position;
+        counterEffect.Play();
     }
     public void ReturnToOrigin()
     {

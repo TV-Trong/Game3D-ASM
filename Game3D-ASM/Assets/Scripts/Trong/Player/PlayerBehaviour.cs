@@ -135,6 +135,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         enemyBehaviour.GetParried();
         isParrySuccess = true;
+        SlashEffect slashEffect = GetComponent<SlashEffect>();
+        slashEffect.PlayCounterEffect();
     }
     #endregion
 }
