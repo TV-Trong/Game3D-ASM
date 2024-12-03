@@ -79046,7 +79046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a60824207e0da749ba76a2e7f981240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HP>k__BackingField: 1500
+  <HP>k__BackingField: 100
   <MP>k__BackingField: 100
   <stamina>k__BackingField: 1000
   <moveSpeed>k__BackingField: 1.5

@@ -42,30 +42,33 @@ public class EnemyIdleState : EnemyState
 
     public override void UpdateState()
     {
-        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
-
-        enemyBehaviour.transform.LookAt(targetPosition);
-
-        if (playerOutOfRange)
+        if (!animator.GetBool("IsDead"))
         {
-            if (currentTimeUntilDropAggro > 0)
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
+
+            enemyBehaviour.transform.LookAt(targetPosition);
+
+            if (playerOutOfRange)
             {
-                currentTimeUntilDropAggro -= Time.deltaTime;
+                if (currentTimeUntilDropAggro > 0)
+                {
+                    currentTimeUntilDropAggro -= Time.deltaTime;
+                }
+                else
+                {
+                    playerOutOfRange = false;
+                    currentTimeUntilDropAggro = timeUntilDropAggro;
+                    enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.sittingState);
+                }
             }
             else
             {
-                playerOutOfRange = false;
-                currentTimeUntilDropAggro = timeUntilDropAggro;
-                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.sittingState);
-            }
-        }
-        else
-        {
-            currentTimeUntilChase -= Time.deltaTime;
-            if (currentTimeUntilChase <= 0)
-            {
-                currentTimeUntilChase = timeUntilChase;
-                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.chaseState);
+                currentTimeUntilChase -= Time.deltaTime;
+                if (currentTimeUntilChase <= 0)
+                {
+                    currentTimeUntilChase = timeUntilChase;
+                    enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.chaseState);
+                }
             }
         }
     }

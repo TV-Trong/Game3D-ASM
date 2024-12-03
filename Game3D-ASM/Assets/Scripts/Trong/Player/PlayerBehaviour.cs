@@ -49,6 +49,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         weapon = swordOnCombat.GetComponent<PhysicalWeapon>();
 
         playerStateMachine.Initialize(idleState);
+        counterAttackTime = 1.5f;
     }
 
     private void Update()
