@@ -21,11 +21,19 @@ public class AnimationController : MonoBehaviour
     private void Update()
     {
         timeSinceLastAtk += Time.deltaTime;
+        Parry();
     }
 
     private void OnFire()
     {
-        if (playerBehaviour.isOnCombatStage)
+        if (playerBehaviour.isParrySuccess)
+        {
+            animator.SetTrigger("CounterSlash");
+            playerBehaviour.isParrySuccess = false;
+            playerBehaviour.counterAttackTime = 1f;
+            return;
+        }
+        if (playerBehaviour.isOnCombatStage && !ActionController.isGameStop)
         {
             if (timeSinceLastAtk > attackResetTime) attackIndex = 0;
             if (!isOnBufferTime)
@@ -42,8 +50,27 @@ public class AnimationController : MonoBehaviour
 
             if (attackIndex > 2) attackIndex = 0;
         }
-        
+
     }
+
+    private void Parry()
+    {
+        if (Input.GetMouseButtonDown(1) && playerBehaviour.isOnCombatStage)
+        {
+            animator.SetBool("Parry", true);
+        }
+        if (Input.GetMouseButtonUp(1) && playerBehaviour.isOnCombatStage)
+        {
+            animator.SetBool("Parry", false);
+            playerBehaviour.isParrying = false;
+            playerBehaviour.isImmune = false;
+        }
+    }
+    public void SetParry()
+    {
+        playerBehaviour.isParrying = true;
+    }
+
     private void SetAttackable()
     {
         isOnBufferTime = false;

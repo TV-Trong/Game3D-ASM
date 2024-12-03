@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &330736963665416277
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 215.61539
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.099990845
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 155.87434
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_Name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      propertyPath: m_TagString
+      value: conca
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1579669061147254961}
+  m_SourcePrefab: {fileID: 100100000, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+--- !u!1 &8626344448438110556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: afc49f365f249473487fcaee30b7712a, type: 3}
+  m_PrefabInstance: {fileID: 330736963665416277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1579669061147254961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626344448438110556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a18e99a75ca49eb97d936d435cab0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  spawnPos: {fileID: 0}
+  deSpawnPos: {fileID: 0}
