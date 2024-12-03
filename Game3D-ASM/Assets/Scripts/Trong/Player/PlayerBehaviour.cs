@@ -28,8 +28,11 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public GameObject swordOnCombat;
     [HideInInspector] public bool isOnCombatStage;
     [HideInInspector] public bool isParrying;
+    [HideInInspector] public bool isParrySuccess;
+    [HideInInspector] public float counterAttackTime = 1.5f;
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
+
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
@@ -51,6 +54,15 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     private void Update()
     {
         playerStateMachine.currentState.Update();
+        if (isParrySuccess)
+        {
+            counterAttackTime -= Time.deltaTime;
+            if (counterAttackTime <= 0)
+            {
+                isParrySuccess = false;
+                counterAttackTime = 1.5f;
+            }
+        }
     }
 
     #region Methods
@@ -122,6 +134,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public void ParryEnemy(EnemyBehaviour enemyBehaviour)
     {
         enemyBehaviour.GetParried();
+        isParrySuccess = true;
     }
     #endregion
 }

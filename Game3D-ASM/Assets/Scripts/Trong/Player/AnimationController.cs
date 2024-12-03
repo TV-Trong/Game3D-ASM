@@ -26,6 +26,13 @@ public class AnimationController : MonoBehaviour
 
     private void OnFire()
     {
+        if (playerBehaviour.isParrySuccess)
+        {
+            animator.SetTrigger("CounterSlash");
+            playerBehaviour.isParrySuccess = false;
+            playerBehaviour.counterAttackTime = 1f;
+            return;
+        }
         if (playerBehaviour.isOnCombatStage && !ActionController.isGameStop)
         {
             if (timeSinceLastAtk > attackResetTime) attackIndex = 0;
@@ -43,7 +50,7 @@ public class AnimationController : MonoBehaviour
 
             if (attackIndex > 2) attackIndex = 0;
         }
-        
+
     }
 
     private void Parry()
