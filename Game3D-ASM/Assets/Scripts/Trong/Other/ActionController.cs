@@ -18,6 +18,7 @@ public class ActionController : MonoBehaviour
     private void Awake()
     {
         cursorControl = GetComponent<CursorController>();
+        QualitySettings.pixelLightCount = 100;
     }
     private void Start()
     {
@@ -49,6 +50,10 @@ public class ActionController : MonoBehaviour
         Time.timeScale = 1;
         customAction.performed -= OnCloseMenu;
         customAction.performed += OnOpenMenu;
+    }
+    public void RemoveAllBinding()
+    {
+        customAction.performed -= OnOpenMenu;
     }
     private void OnCloseMenu(InputAction.CallbackContext context)
     {

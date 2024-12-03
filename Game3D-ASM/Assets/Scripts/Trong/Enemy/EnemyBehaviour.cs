@@ -116,6 +116,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private void Update()
     {
         stateMachine.currentState.UpdateState();
+        if (animator.GetBool("LockMovement"))
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
     }
 
     private void FixedUpdate()
@@ -138,7 +146,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !animator.GetBool("IsDead"))
         {
             isImmune = true;
             HP -= healthDamage;
@@ -155,7 +163,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             }
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0)
+        {
+            Die();
+            HP = maxHP;
+        }
     }
 
     public void ResetIFrame()
@@ -181,8 +193,9 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
-        gameObject.SetActive(false);
+        animator.SetBool("IsDead", true);
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 7f);
     }
 
     public void SetPlayerInAggroRange(bool isTrue)
@@ -230,10 +243,15 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
     public void GetParried()
     {
-        animator.SetTrigger("GetParried");
+        animator.SetBool("IsStagger", true);
+        animator.SetTrigger("Stagger");
         slashEffect1.Stop();
         slashEffect2.Stop();
         slashEffect3.Stop();
+    }
+    public void IsStaggerFalse()
+    {
+        animator.SetBool("IsStagger", false);
     }
     #endregion
 }
