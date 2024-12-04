@@ -6,15 +6,21 @@ using static UnityEngine.ParticleSystem;
 public class SkillManager : MonoBehaviour
 {
     public ParticleSystem skill1;
+    public ParticleSystem skill2;
     public float distance = 0;
     public float searchRadius = 10f;
     private Animator anim;
     private EnemyBehaviour enemy;
-    public bool isColliding = true;
 
-    public int coldDownTime = 20;
-    private float recoveryTime = 20f;
-    private float elapsedTime = 0f;
+    private int coldDownTime1 = 20;
+    private int coldDownTime2 = 20;
+    private float recoveryTime1 = 20f;
+    private float recoveryTime2 = 40f;
+    private float elapsedTime1 = 0f;
+    private float elapsedTime2 = 0f;
+
+    public AudioSource skillSound1;
+    public AudioSource skillSound2;
 
     private void Awake()
     {
@@ -23,23 +29,37 @@ public class SkillManager : MonoBehaviour
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= recoveryTime)
+        elapsedTime1 += Time.deltaTime;
+        if (elapsedTime1 >= recoveryTime1)
         {
-            coldDownTime = 20;
-            elapsedTime = 0f;
+            coldDownTime1 = 20;
+            elapsedTime1 = 0f;
         }
-        if (coldDownTime >= 20)
+        if (coldDownTime1 >= 20)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                //isColliding = true;
-                //var collisionModule = skill1.collision;
-                //collisionModule.enabled = isColliding;
                 CastSkill(skill1);
                 anim.SetTrigger("Skill1");
+                coldDownTime1 = 0;
+                skillSound1.Play();
+            }
+        }
 
-                //collisionModule.enabled = isColliding;
+        elapsedTime2 += Time.deltaTime;
+        if (elapsedTime2 >= recoveryTime1)
+        {
+            coldDownTime2 = 20;
+            elapsedTime2 = 0f;
+        }
+        if (coldDownTime2 >= 20)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                CastSkill(skill2);
+                anim.SetTrigger("Skill1");
+                coldDownTime2 = 0;
+                skillSound2.Play();
             }
         }
     }
@@ -52,13 +72,11 @@ public class SkillManager : MonoBehaviour
 
     void CastSkill(ParticleSystem skill)
     {
-        // Tìm các object có tag "Enemy" trong bán kính searchRadius
         Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
 
         GameObject nearestObject = null;
         float nearestDistance = Mathf.Infinity;
 
-        // Tìm object gần nhất
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.CompareTag("Enemy"))
@@ -71,19 +89,15 @@ public class SkillManager : MonoBehaviour
                 }
             }
         }
-        // Nếu tìm thấy object, sinh Particle System tại vị trí đó
         if (nearestObject != null)
         {
             skill.transform.position = nearestObject.transform.position;
             PlayPartical(skill);
             Quaternion rotation = Quaternion.LookRotation(skill.transform.position);
-            //Instantiate(skill, nearestObject.transform.position, Quaternion.identity);
         }
-        // Nếu không tìm thấy, sinh Particle System trước mặt player
         else
         {
             Vector3 spawnPosition = transform.position + transform.forward * distance;
-            //Instantiate(skill, spawnPosition, Quaternion.identity);
             skill.transform.position = spawnPosition;
             PlayPartical(skill);
             Quaternion rotation = Quaternion.LookRotation(skill.transform.position);
@@ -92,11 +106,6 @@ public class SkillManager : MonoBehaviour
 
     void PlayPartical(ParticleSystem skill)
     {
-        //var collisionModule = skill.collision;
-        //isColliding = true;
-        //collisionModule.enabled = isColliding;
         skill.Play();
-        coldDownTime = 0;
-        //collisionModule.enabled = isColliding;
     }
 }
