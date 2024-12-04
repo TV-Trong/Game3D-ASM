@@ -57141,7 +57141,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f21aa068f7c2fd740ad2a21aff4af706, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9402f17d26a92734ba700d5fbfca231e, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1152273061
 GameObject:
@@ -80632,7 +80632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a60824207e0da749ba76a2e7f981240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HP>k__BackingField: 1000
+  <HP>k__BackingField: 500
   <MP>k__BackingField: 100
   <stamina>k__BackingField: 1000
   <moveSpeed>k__BackingField: 1.5

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: a2916dea379e3684bbdf43e7d1190a0e
   - enabled: 1
-    path: Assets/Scenes/CharacterTesting.unity
+    path: Assets/Scenes/Duc.unity
+    guid: f74c98ce6441efc4bbf25c306b613e36
+  - enabled: 1
+    path: Assets/Scenes/BossFight.unity
     guid: 475399289490940419bfbe41ba337178
   m_configObjects: {}

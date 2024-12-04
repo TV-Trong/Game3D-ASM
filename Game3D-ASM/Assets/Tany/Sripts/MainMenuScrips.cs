@@ -81,7 +81,7 @@ public class MainMenuScrips : MonoBehaviour
 
     public void GoLogin()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("CharacterTesting");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
 
     }
 }

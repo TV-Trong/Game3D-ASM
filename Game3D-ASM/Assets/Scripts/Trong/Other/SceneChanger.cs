@@ -10,6 +10,6 @@ public class SceneChanger : MonoBehaviour
 
     public void Quit()
     {
-
+        SceneManager.LoadScene(0);
     }
 }
