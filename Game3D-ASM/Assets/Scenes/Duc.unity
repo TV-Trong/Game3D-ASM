@@ -58327,6 +58327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowBufferTime: 1.2
   attackResetTime: 2.6
+  deathCam: {fileID: 0}
+  deathCanvas: {fileID: 0}
 --- !u!114 &1381341114
 MonoBehaviour:
   m_ObjectHideFlags: 0

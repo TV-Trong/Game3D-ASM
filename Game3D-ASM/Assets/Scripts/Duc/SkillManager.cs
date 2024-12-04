@@ -40,14 +40,13 @@ public class SkillManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 CastSkill(skill1);
-                anim.SetTrigger("Skill1");
                 coldDownTime1 = 0;
                 skillSound1.Play();
             }
         }
 
         elapsedTime2 += Time.deltaTime;
-        if (elapsedTime2 >= recoveryTime1)
+        if (elapsedTime2 >= recoveryTime2)
         {
             coldDownTime2 = 20;
             elapsedTime2 = 0f;
@@ -57,7 +56,6 @@ public class SkillManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 CastSkill(skill2);
-                anim.SetTrigger("Skill1");
                 coldDownTime2 = 0;
                 skillSound2.Play();
             }

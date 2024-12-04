@@ -17,7 +17,6 @@ public class SpawnMonster : MonoBehaviour
 
     public int enemyCountBase = 0;
     public bool isActive = false;
-    public string monsterTag = "EnemyFromChallenge";
 
     private void Start()
     {
@@ -30,7 +29,7 @@ public class SpawnMonster : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance <= interactDistance)
         {
-            notificationUI.SetActive(true);
+            //notificationUI.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -38,10 +37,10 @@ public class SpawnMonster : MonoBehaviour
                 isActive = true;
             }
         }
-        else
-        {
-            notificationUI.SetActive(false);
-        }
+        //else
+        //{
+        //    notificationUI.SetActive(false);
+        //}
 
         Check();
     }
