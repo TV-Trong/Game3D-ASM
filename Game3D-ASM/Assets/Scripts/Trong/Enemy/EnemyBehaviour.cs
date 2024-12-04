@@ -33,6 +33,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public EnemyAttackState attackState;
     public EnemySittingState sittingState;
     #endregion
+    public AudioClip hit;
 
     #region Animation Trigger
     private void AnimationTriggerEnvent(AnimationTriggerType triggerType)
@@ -81,6 +82,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem slashEffect3;
     [SerializeField] Transform targetTransform;
+    public AudioClip[] slashSounds;
+    public AudioClip explodetion;
 
     private Transform originTransform;
     private Transform originTransform2;
@@ -153,7 +156,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             DisplayDamageTaken(healthDamage, isCrit);
             UpdateHealthbar();
             Invoke("ResetIFrame", iFrameTime);
-
+            SoundManager.instance.PlayClip(hit);
             poise -= poiseDamage;
             if (poise <= 0)
             {
@@ -252,6 +255,19 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void IsStaggerFalse()
     {
         animator.SetBool("IsStagger", false);
+    }
+    public void PlaySlashSound()
+    {
+        SoundManager.instance.PlayClip(GetSlashSound());
+    }
+    public void PlayExplosion()
+    {
+        SoundManager.instance.PlayClip(explodetion);
+    }
+    private AudioClip GetSlashSound()
+    {
+        int randomInt = Random.Range(0, 2);
+        return slashSounds[randomInt];
     }
     #endregion
 }
