@@ -48,21 +48,24 @@ public class EnemyChaseState : EnemyState
 
     public override void UpdateState()
     {
-        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
-
-        enemyBehaviour.transform.LookAt(targetPosition);
-
-        if (playerObject != null && !animator.GetBool("LockMovement"))
+        if (!animator.GetBool("IsDead"))
         {
-            enemyBehaviour.agent.SetDestination(playerObject.transform.position);
-        }
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
-        timeSinceLastAttack += Time.deltaTime;
-        if (timeSinceLastAttack > 15f)
-        {
-            animator.SetBool("IsChasing", false);
-            enemyBehaviour.agent.isStopped = true;
-            enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            enemyBehaviour.transform.LookAt(targetPosition);
+
+            if (playerObject != null && !animator.GetBool("LockMovement"))
+            {
+                enemyBehaviour.agent.SetDestination(playerObject.transform.position);
+            }
+
+            timeSinceLastAttack += Time.deltaTime;
+            if (timeSinceLastAttack > 15f)
+            {
+                animator.SetBool("IsChasing", false);
+                enemyBehaviour.agent.isStopped = true;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
         }
     }
 }

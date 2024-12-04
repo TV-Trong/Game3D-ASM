@@ -21,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+    private bool isDead;
     #endregion
 
 
@@ -49,6 +50,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         weapon = swordOnCombat.GetComponent<PhysicalWeapon>();
 
         playerStateMachine.Initialize(idleState);
+        counterAttackTime = 1.5f;
     }
 
     private void Update()
@@ -80,7 +82,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !isDead)
         {
             HP -= healthDamage;
             DisplayDamageTaken(healthDamage, isCrit);
@@ -94,7 +96,11 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             }
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0 && !isDead)
+        {
+            Die();
+            isDead = true;
+        }
     }
 
     public void StartAttack()
@@ -129,7 +135,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     }
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
+        AnimationController anim = GetComponent<AnimationController>();
+        anim.Die();
     }
     public void ParryEnemy(EnemyBehaviour enemyBehaviour)
     {
