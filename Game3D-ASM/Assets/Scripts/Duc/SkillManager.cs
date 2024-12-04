@@ -14,8 +14,8 @@ public class SkillManager : MonoBehaviour
 
     private int coldDownTime1 = 20;
     private int coldDownTime2 = 20;
-    private float recoveryTime1 = 20f;
-    private float recoveryTime2 = 40f;
+    private float recoveryTime1 = 10f;
+    private float recoveryTime2 = 20f;
     private float elapsedTime1 = 0f;
     private float elapsedTime2 = 0f;
 
