@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [HideInInspector] public float counterAttackTime = 1.5f;
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
-
+    [SerializeField] private TextMeshProUGUI textNumber;
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
@@ -51,6 +52,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
         playerStateMachine.Initialize(idleState);
         counterAttackTime = 1.5f;
+        maxHP = HP;
+        UpdateHealthbar();
     }
 
     private void Update()
@@ -94,6 +97,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             {
                 poise = maxPoise;
             }
+
+            UpdateHealthbar();
         }
 
         if (HP <= 0 && !isDead)
@@ -131,7 +136,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void UpdateHealthbar()
     {
-        throw new System.NotImplementedException();
+        healthSlider.value = HP / maxHP;
+        textNumber.text = HP + "   /   " + maxHP;
     }
     public void Die()
     {
