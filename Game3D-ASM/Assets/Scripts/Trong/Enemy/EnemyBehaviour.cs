@@ -33,6 +33,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public EnemyAttackState attackState;
     public EnemySittingState sittingState;
     #endregion
+    public AudioClip hit;
 
     #region Animation Trigger
     private void AnimationTriggerEnvent(AnimationTriggerType triggerType)
@@ -81,6 +82,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [SerializeField] private ParticleSystem slashEffect2;
     [SerializeField] private ParticleSystem slashEffect3;
     [SerializeField] Transform targetTransform;
+    public AudioClip[] slashSounds;
+    public AudioClip explodetion;
 
     private Transform originTransform;
     private Transform originTransform2;
@@ -116,6 +119,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private void Update()
     {
         stateMachine.currentState.UpdateState();
+        if (animator.GetBool("LockMovement"))
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
     }
 
     private void FixedUpdate()
@@ -138,14 +149,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !animator.GetBool("IsDead"))
         {
             isImmune = true;
             HP -= healthDamage;
             DisplayDamageTaken(healthDamage, isCrit);
             UpdateHealthbar();
             Invoke("ResetIFrame", iFrameTime);
-
+            SoundManager.instance.PlayClip(hit);
             poise -= poiseDamage;
             if (poise <= 0)
             {
@@ -155,7 +166,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             }
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0)
+        {
+            Die();
+            HP = maxHP;
+        }
     }
 
     public void ResetIFrame()
@@ -181,8 +196,9 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
-        gameObject.SetActive(false);
+        animator.SetBool("IsDead", true);
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 7f);
     }
 
     public void SetPlayerInAggroRange(bool isTrue)
@@ -230,10 +246,28 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     }
     public void GetParried()
     {
-        animator.SetTrigger("GetParried");
+        animator.SetBool("IsStagger", true);
+        animator.SetTrigger("Stagger");
         slashEffect1.Stop();
         slashEffect2.Stop();
         slashEffect3.Stop();
+    }
+    public void IsStaggerFalse()
+    {
+        animator.SetBool("IsStagger", false);
+    }
+    public void PlaySlashSound()
+    {
+        SoundManager.instance.PlayClip(GetSlashSound());
+    }
+    public void PlayExplosion()
+    {
+        SoundManager.instance.PlayClip(explodetion);
+    }
+    private AudioClip GetSlashSound()
+    {
+        int randomInt = Random.Range(0, 2);
+        return slashSounds[randomInt];
     }
     #endregion
 }

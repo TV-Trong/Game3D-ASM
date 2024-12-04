@@ -30,13 +30,17 @@ public class PlayerCombatState : PlayerState
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (!animator.GetBool("IsDead"))
         {
-            playerBehaviour.isOnCombatStage = false;
-            playerBehaviour.swordIdle.SetActive(true);
-            playerBehaviour.swordOnCombat.SetActive(false);
-            animator.SetTrigger("ShealthSword");
-            playerStateMachine.SwitchState(playerBehaviour.idleState);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                playerBehaviour.isOnCombatStage = false;
+                playerBehaviour.swordIdle.SetActive(true);
+                playerBehaviour.swordOnCombat.SetActive(false);
+                animator.SetTrigger("ShealthSword");
+                playerStateMachine.SwitchState(playerBehaviour.idleState);
+                playerBehaviour.PlayShealthSound(false);
+            }
         }
     }
 }

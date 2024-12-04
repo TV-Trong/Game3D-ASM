@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+    private bool isDead;
     #endregion
 
 
@@ -32,13 +34,17 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [HideInInspector] public float counterAttackTime = 1.5f;
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
-
+    [SerializeField] private TextMeshProUGUI textNumber;
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
     public PlayerIdleState idleState;
     public PlayerCombatState combatState;
     #endregion
+    public AudioClip hit;
+    public AudioClip deathSound;
+    public AudioClip shealthSword;
+    public AudioClip unshealth;
 
     private void Awake()
     {
@@ -49,6 +55,9 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         weapon = swordOnCombat.GetComponent<PhysicalWeapon>();
 
         playerStateMachine.Initialize(idleState);
+        counterAttackTime = 1.5f;
+        maxHP = HP;
+        UpdateHealthbar();
     }
 
     private void Update()
@@ -80,21 +89,29 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !isDead)
         {
             HP -= healthDamage;
             DisplayDamageTaken(healthDamage, isCrit);
             isImmune = true;
             Invoke("ResetIFrame", iFrameTime);
-
+            SoundManager.instance.PlayClip(hit);
             poise -= poiseDamage;
             if (poise <= 0)
             {
                 poise = maxPoise;
             }
+
+            UpdateHealthbar();
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0 && !isDead)
+        {
+            Die();
+            isDead = true;
+            HP = 0;
+            UpdateHealthbar();
+        }
     }
 
     public void StartAttack()
@@ -125,11 +142,14 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void UpdateHealthbar()
     {
-        throw new System.NotImplementedException();
+        healthSlider.value = HP / maxHP;
+        textNumber.text = HP + "   /   " + maxHP;
     }
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
+        AnimationController anim = GetComponent<AnimationController>();
+        anim.Die();
+        SoundManager.instance.PlayClip(deathSound);
     }
     public void ParryEnemy(EnemyBehaviour enemyBehaviour)
     {
@@ -137,6 +157,18 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         isParrySuccess = true;
         SlashEffect slashEffect = GetComponent<SlashEffect>();
         slashEffect.PlayCounterEffect();
+    }
+
+    public void PlayShealthSound(bool isShealth)
+    {
+        if (isShealth)
+        {
+            SoundManager.instance.PlayClip(shealthSword);
+        }
+        else
+        {
+            SoundManager.instance.PlayClip(unshealth);
+        }
     }
     #endregion
 }

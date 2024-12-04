@@ -26,13 +26,17 @@ public class PlayerIdleState : PlayerState
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
+        if (!animator.GetBool("IsDead"))
         {
-            playerBehaviour.isOnCombatStage = true;
-            playerBehaviour.swordIdle.SetActive(false);
-            playerBehaviour.swordOnCombat.SetActive(true);
-            animator.SetTrigger("DrawSword");
-            playerStateMachine.SwitchState(playerBehaviour.combatState);
+            if (Input.GetKeyDown(KeyCode.R) || Input.GetMouseButtonDown(0))
+            {
+                playerBehaviour.isOnCombatStage = true;
+                playerBehaviour.swordIdle.SetActive(false);
+                playerBehaviour.swordOnCombat.SetActive(true);
+                animator.SetTrigger("DrawSword");
+                playerStateMachine.SwitchState(playerBehaviour.combatState);
+                playerBehaviour.PlayShealthSound(true);
+            }
         }
     }
 }
