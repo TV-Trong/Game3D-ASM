@@ -55818,7 +55818,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -55913,6 +55913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1015796360}
+  backgroundMusic: {fileID: 8300000, guid: d1d49c6b45fcc2948afd23c098a98840, type: 3}
 --- !u!1 &1018133013
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,16 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager instance;
 
+    public AudioClip backgroundMusic;
+
     private void Awake()
     {
         instance = this;
+    }
+    private void Start()
+    {
+        audioSource.clip = backgroundMusic;
+        audioSource.Play();
     }
 
     public void PlayClip(AudioClip clip)
