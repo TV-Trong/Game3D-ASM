@@ -21,14 +21,19 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+    private bool isDead;
     #endregion
 
 
     public GameObject swordIdle;
     public GameObject swordOnCombat;
     [HideInInspector] public bool isOnCombatStage;
+    [HideInInspector] public bool isParrying;
+    [HideInInspector] public bool isParrySuccess;
+    [HideInInspector] public float counterAttackTime = 1.5f;
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
+
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
@@ -45,11 +50,21 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         weapon = swordOnCombat.GetComponent<PhysicalWeapon>();
 
         playerStateMachine.Initialize(idleState);
+        counterAttackTime = 1.5f;
     }
 
     private void Update()
     {
         playerStateMachine.currentState.Update();
+        if (isParrySuccess)
+        {
+            counterAttackTime -= Time.deltaTime;
+            if (counterAttackTime <= 0)
+            {
+                isParrySuccess = false;
+                counterAttackTime = 1.5f;
+            }
+        }
     }
 
     #region Methods
@@ -67,7 +82,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !isDead)
         {
             HP -= healthDamage;
             DisplayDamageTaken(healthDamage, isCrit);
@@ -81,7 +96,11 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             }
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0 && !isDead)
+        {
+            Die();
+            isDead = true;
+        }
     }
 
     public void StartAttack()
@@ -116,7 +135,15 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     }
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
+        AnimationController anim = GetComponent<AnimationController>();
+        anim.Die();
+    }
+    public void ParryEnemy(EnemyBehaviour enemyBehaviour)
+    {
+        enemyBehaviour.GetParried();
+        isParrySuccess = true;
+        SlashEffect slashEffect = GetComponent<SlashEffect>();
+        slashEffect.PlayCounterEffect();
     }
     #endregion
 }

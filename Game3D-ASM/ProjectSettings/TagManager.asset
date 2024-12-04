@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - conca
+  - spawn
+  - despawn
+  - ParryZone
   layers:
   - Default
   - TransparentFX
@@ -42,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 376250841
     locked: 0

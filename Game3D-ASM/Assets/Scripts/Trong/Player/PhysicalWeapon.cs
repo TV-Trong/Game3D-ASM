@@ -19,7 +19,7 @@ public class PhysicalWeapon : MonoBehaviour
     private float poiseDamage;
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Enemy") && isAbleToDealDamage)
         {

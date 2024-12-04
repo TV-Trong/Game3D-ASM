@@ -13,7 +13,7 @@ public class EnemyAttackState : EnemyState
         {
             if (enemyBehaviour.isPlayerInAttackRange)
             {
-                if (timeSinceLastAttack > 7)
+                if (timeSinceLastAttack > 4)
                 {
                     animator.SetTrigger("Attack");
                     timeSinceLastAttack = 0f;
@@ -24,7 +24,6 @@ public class EnemyAttackState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("You won't leave Skyrim alive!");
         animator.SetTrigger("Attack");
         timeSinceLastAttack = 0f;
         enemyBehaviour.agent.isStopped = false;
@@ -42,24 +41,33 @@ public class EnemyAttackState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Is in attack state");
-        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
-
-        enemyBehaviour.transform.LookAt(targetPosition);
-
-        if (playerObject != null && !animator.GetBool("LockMovement"))
+        if (!animator.GetBool("IsDead"))
         {
-            enemyBehaviour.agent.SetDestination(playerObject.transform.position);
-            animator.SetBool("IsChasing", true);
-        }
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
-        timeSinceLastAttack += Time.deltaTime;
-        if (timeSinceLastAttack > 15f)
-        {
-            Debug.Log("Come back here scum!");
-            animator.SetBool("IsChasing", false);
-            enemyBehaviour.agent.isStopped = true;
-            enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            enemyBehaviour.transform.LookAt(targetPosition);
+
+            if (playerObject != null && !animator.GetBool("LockMovement"))
+            {
+                enemyBehaviour.agent.SetDestination(playerObject.transform.position);
+                if (enemyBehaviour.isPlayerInAttackRange)
+                {
+                    enemyBehaviour.agent.speed = .7f;
+                }
+                else
+                {
+                    enemyBehaviour.agent.speed = 1.5f;
+                }
+                animator.SetBool("IsChasing", true);
+            }
+
+            timeSinceLastAttack += Time.deltaTime;
+            if (timeSinceLastAttack > 15f)
+            {
+                animator.SetBool("IsChasing", false);
+                enemyBehaviour.agent.isStopped = true;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
         }
     }
 }

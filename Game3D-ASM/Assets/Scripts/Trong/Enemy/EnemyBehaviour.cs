@@ -22,6 +22,8 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
     public float maxPoise { get; set; }
+
+    public float timeTillAggro = 3f;
     #endregion
 
     #region States Variable
@@ -72,6 +74,17 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public bool isPlayerInChaseRange { get; set; }
     public float patrolArea { get; set; } = 25f;
     [SerializeField] private EnemyPhysicalWeapon weapon;
+    [SerializeField] private GameObject slashObject1;
+    [SerializeField] private GameObject slashObject2;
+    [SerializeField] private GameObject slashObject3;
+    [SerializeField] private ParticleSystem slashEffect1;
+    [SerializeField] private ParticleSystem slashEffect2;
+    [SerializeField] private ParticleSystem slashEffect3;
+    [SerializeField] Transform targetTransform;
+
+    private Transform originTransform;
+    private Transform originTransform2;
+    private Transform originTransform3;
 
     private void Awake()
     {
@@ -89,6 +102,10 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         chaseState = new EnemyChaseState(playerObject, animator, this, stateMachine);
         attackState = new EnemyAttackState(playerObject, animator, this, stateMachine);
         sittingState = new EnemySittingState(playerObject, animator, this, stateMachine);
+
+        originTransform = slashObject1.transform;
+        originTransform2 = slashObject2.transform;
+        originTransform3 = slashObject3.transform;
     }
 
     private void Start()
@@ -99,6 +116,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private void Update()
     {
         stateMachine.currentState.UpdateState();
+        if (animator.GetBool("LockMovement"))
+        {
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
     }
 
     private void FixedUpdate()
@@ -121,7 +146,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void TakeDamage(float healthDamage, float poiseDamage, bool isCrit)
     {
-        if (!isImmune)
+        if (!isImmune && !animator.GetBool("IsDead"))
         {
             isImmune = true;
             HP -= healthDamage;
@@ -138,7 +163,11 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             }
         }
 
-        if (HP <= 0) Die();
+        if (HP <= 0)
+        {
+            Die();
+            HP = maxHP;
+        }
     }
 
     public void ResetIFrame()
@@ -164,8 +193,9 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
 
     public void Die()
     {
-        Debug.Log(gameObject.name + " has Died!");
-        gameObject.SetActive(false);
+        animator.SetBool("IsDead", true);
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 7f);
     }
 
     public void SetPlayerInAggroRange(bool isTrue)
@@ -191,6 +221,37 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     public void EndAttack()
     {
         weapon.StopDealingDamage();
+    }
+
+    public void Slash1()
+    {
+        slashObject1.transform.position = targetTransform.position;
+        slashObject1.transform.rotation = targetTransform.rotation * originTransform.rotation;
+        slashEffect1.Play();
+    }
+    public void Slash2()
+    {
+        slashObject2.transform.position = targetTransform.position;
+        slashObject2.transform.rotation = targetTransform.rotation * originTransform2.rotation;
+        slashEffect2.Play();
+    }
+    public void Slash3()
+    {
+        slashObject3.transform.position = targetTransform.position;
+        slashObject3.transform.rotation = originTransform3.rotation * targetTransform.rotation;
+        slashEffect3.Play();
+    }
+    public void GetParried()
+    {
+        animator.SetBool("IsStagger", true);
+        animator.SetTrigger("Stagger");
+        slashEffect1.Stop();
+        slashEffect2.Stop();
+        slashEffect3.Stop();
+    }
+    public void IsStaggerFalse()
+    {
+        animator.SetBool("IsStagger", false);
     }
     #endregion
 }

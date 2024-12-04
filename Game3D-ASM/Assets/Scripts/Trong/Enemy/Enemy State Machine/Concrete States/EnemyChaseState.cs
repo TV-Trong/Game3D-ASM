@@ -20,7 +20,6 @@ public class EnemyChaseState : EnemyState
         {
             if (!enemyBehaviour.isPlayerInChaseRange)
             {
-                Debug.Log("Come back here scum!");
                 animator.SetBool("IsChasing", false);
                 enemyBehaviour.agent.isStopped = true;
                 enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
@@ -30,9 +29,9 @@ public class EnemyChaseState : EnemyState
 
     public override void EnterState()
     {
-        Debug.Log("Never should have come here!");
         animator.SetBool("IsChasing", true);
         animator.SetBool("IsIdle", false);
+        animator.SetTrigger("DrawSword");
         timeSinceLastAttack = 0f;
         enemyBehaviour.agent.isStopped = false;
     }
@@ -49,23 +48,24 @@ public class EnemyChaseState : EnemyState
 
     public override void UpdateState()
     {
-        Debug.Log("Is in chase state");
-        Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
-
-        enemyBehaviour.transform.LookAt(targetPosition);
-
-        if (playerObject != null && !animator.GetBool("LockMovement"))
+        if (!animator.GetBool("IsDead"))
         {
-            enemyBehaviour.agent.SetDestination(playerObject.transform.position);
-        }
+            Vector3 targetPosition = new Vector3(playerObject.transform.position.x, enemyBehaviour.transform.position.y, playerObject.transform.position.z);
 
-        timeSinceLastAttack += Time.deltaTime;
-        if (timeSinceLastAttack > 15f)
-        {
-            Debug.Log("Come back here scum!");
-            animator.SetBool("IsChasing", false);
-            enemyBehaviour.agent.isStopped = true;
-            enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            enemyBehaviour.transform.LookAt(targetPosition);
+
+            if (playerObject != null && !animator.GetBool("LockMovement"))
+            {
+                enemyBehaviour.agent.SetDestination(playerObject.transform.position);
+            }
+
+            timeSinceLastAttack += Time.deltaTime;
+            if (timeSinceLastAttack > 15f)
+            {
+                animator.SetBool("IsChasing", false);
+                enemyBehaviour.agent.isStopped = true;
+                enemyBehaviour.stateMachine.SwitchStage(enemyBehaviour.idleState);
+            }
         }
     }
 }

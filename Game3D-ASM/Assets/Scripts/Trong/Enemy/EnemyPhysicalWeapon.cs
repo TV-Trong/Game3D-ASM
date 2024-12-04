@@ -15,12 +15,18 @@ public class EnemyPhysicalWeapon : MonoBehaviour
     private bool isCrit;
     private float finalDamage;
     private float poiseDamage;
+    private PlayerBehaviour playerBehaviour;
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && isAbleToDealDamage)
         {
+            playerBehaviour = other.GetComponent<PlayerBehaviour>();
+            if (playerBehaviour.isImmune)
+            {
+                playerBehaviour.ParryEnemy(enemyBehaviour);
+            }
             SetUpEnemyStat();
             isCrit = (enemyBehaviour.CheckCritChance(enemyCritChance));
             finalDamage = enemyDamage * sharpness;
