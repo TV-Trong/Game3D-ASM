@@ -39,6 +39,7 @@ public class PlayerCombatState : PlayerState
                 playerBehaviour.swordOnCombat.SetActive(false);
                 animator.SetTrigger("ShealthSword");
                 playerStateMachine.SwitchState(playerBehaviour.idleState);
+                playerBehaviour.PlayShealthSound(false);
             }
         }
     }

@@ -41,6 +41,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public PlayerIdleState idleState;
     public PlayerCombatState combatState;
     #endregion
+    public AudioClip hit;
+    public AudioClip deathSound;
+    public AudioClip shealthSword;
+    public AudioClip unshealth;
 
     private void Awake()
     {
@@ -91,7 +95,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             DisplayDamageTaken(healthDamage, isCrit);
             isImmune = true;
             Invoke("ResetIFrame", iFrameTime);
-
+            SoundManager.instance.PlayClip(hit);
             poise -= poiseDamage;
             if (poise <= 0)
             {
@@ -105,6 +109,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         {
             Die();
             isDead = true;
+            HP = 0;
+            UpdateHealthbar();
         }
     }
 
@@ -143,6 +149,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         AnimationController anim = GetComponent<AnimationController>();
         anim.Die();
+        SoundManager.instance.PlayClip(deathSound);
     }
     public void ParryEnemy(EnemyBehaviour enemyBehaviour)
     {
@@ -150,6 +157,18 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         isParrySuccess = true;
         SlashEffect slashEffect = GetComponent<SlashEffect>();
         slashEffect.PlayCounterEffect();
+    }
+
+    public void PlayShealthSound(bool isShealth)
+    {
+        if (isShealth)
+        {
+            SoundManager.instance.PlayClip(shealthSword);
+        }
+        else
+        {
+            SoundManager.instance.PlayClip(unshealth);
+        }
     }
     #endregion
 }
