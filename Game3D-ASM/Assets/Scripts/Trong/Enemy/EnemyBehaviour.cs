@@ -154,7 +154,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
             isImmune = true;
             HP -= healthDamage;
             DisplayDamageTaken(healthDamage, isCrit);
-            UpdateHealthbar();
+            UpdateSlider();
             Invoke("ResetIFrame", iFrameTime);
             SoundManager.instance.PlayClip(hit);
             poise -= poiseDamage;
@@ -188,7 +188,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
         popupTextObject.SetActive(true);
     }
 
-    public void UpdateHealthbar()
+    public void UpdateSlider()
     {
         healthSlider.gameObject.SetActive(true);
         healthSlider.value = HP / maxHP;

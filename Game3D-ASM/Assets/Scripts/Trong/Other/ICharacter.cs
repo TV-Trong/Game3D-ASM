@@ -25,7 +25,7 @@ public interface ICharacter
     public bool CheckCritChance(float critChance);
     public void ResetIFrame();
     public void DisplayDamageTaken(float damage, bool isCrit);
-    public void UpdateHealthbar();
+    public void UpdateSlider();
     public void Die();
 
 }

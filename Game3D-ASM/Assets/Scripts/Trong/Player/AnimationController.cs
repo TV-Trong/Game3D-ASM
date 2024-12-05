@@ -69,6 +69,7 @@ public class AnimationController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && playerBehaviour.isOnCombatStage)
         {
             animator.SetBool("Parry", true);
+            playerBehaviour.isParrying = true;
         }
         if (Input.GetMouseButtonUp(1) && playerBehaviour.isOnCombatStage)
         {

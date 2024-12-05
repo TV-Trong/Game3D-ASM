@@ -8,7 +8,11 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 {
     #region Base Stat Variables
     [field: SerializeField] public float HP { get; set; }
+
+    public float healthRegen = 5;
     [field: SerializeField] public float MP { get; set; }
+
+    public float manaRegen = 5;
     [field: SerializeField] public float stamina { get; set; }
     [field: SerializeField] public float moveSpeed { get; set; }
     [field: SerializeField] public float strength { get; set; }
@@ -20,7 +24,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public bool isImmune { get; set; }
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
+    public Slider manaSlider;
     public float maxHP { get; set; }
+    public float maxMP { get; set; }
+    public float baseStrenght { get; set; }
     public float maxPoise { get; set; }
     private bool isDead;
     #endregion
@@ -35,6 +42,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     private PhysicalWeapon weapon;
     private EnemyBehaviour enemy;
     [SerializeField] private TextMeshProUGUI textNumber;
+    [SerializeField] private TextMeshProUGUI MP_textNumber;
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
@@ -57,7 +65,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         playerStateMachine.Initialize(idleState);
         counterAttackTime = 1.5f;
         maxHP = HP;
-        UpdateHealthbar();
+        maxMP = MP;
+        baseStrenght = strength;
+        UpdateSlider();
+        StartCoroutine(Regenerate());
     }
 
     private void Update()
@@ -75,6 +86,18 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     }
 
     #region Methods
+    IEnumerator Regenerate()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            if (MP < maxMP) MP += manaRegen;
+            if (HP < maxHP) HP += healthRegen;
+            MP = Mathf.Clamp(MP, 0 , maxMP);
+            HP = Mathf.Clamp(HP, 0, maxHP);
+            UpdateSlider();
+        }
+    }
     public bool CheckCritChance(float critChance)
     {
         int random = Random.Range(0, 100);
@@ -102,7 +125,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
                 poise = maxPoise;
             }
 
-            UpdateHealthbar();
+            UpdateSlider();
         }
 
         if (HP <= 0 && !isDead)
@@ -110,8 +133,13 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             Die();
             isDead = true;
             HP = 0;
-            UpdateHealthbar();
+            UpdateSlider();
         }
+    }
+    public void ConsumeMana(float mana)
+    {
+        MP -= mana;
+        UpdateSlider();
     }
 
     public void StartAttack()
@@ -140,10 +168,12 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         popupTextObject.SetActive(true);
     }
 
-    public void UpdateHealthbar()
+    public void UpdateSlider()
     {
         healthSlider.value = HP / maxHP;
         textNumber.text = HP + "   /   " + maxHP;
+        manaSlider.value = MP / maxMP;
+        MP_textNumber.text = MP + "   /   " + maxMP;
     }
     public void Die()
     {
@@ -169,6 +199,14 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         {
             SoundManager.instance.PlayClip(unshealth);
         }
+    }
+    public void SetCounterDamage()
+    {
+        strength *= 1.5f;
+    }
+    public void ReturnToBaseStrength()
+    {
+        strength = baseStrenght;
     }
     #endregion
 }
