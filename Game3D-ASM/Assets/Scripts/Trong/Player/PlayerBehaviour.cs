@@ -21,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
     public float maxHP { get; set; }
+    public float baseStrenght { get; set; }
     public float maxPoise { get; set; }
     private bool isDead;
     #endregion
@@ -57,6 +58,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         playerStateMachine.Initialize(idleState);
         counterAttackTime = 1.5f;
         maxHP = HP;
+        baseStrenght = strength;
         UpdateHealthbar();
     }
 
@@ -169,6 +171,14 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         {
             SoundManager.instance.PlayClip(unshealth);
         }
+    }
+    public void SetCounterDamage()
+    {
+        strength *= 1.5f;
+    }
+    public void ReturnToBaseStrength()
+    {
+        strength = baseStrenght;
     }
     #endregion
 }
