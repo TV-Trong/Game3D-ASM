@@ -23,7 +23,7 @@ public class EnemyPhysicalWeapon : MonoBehaviour
         if (other.CompareTag("Player") && isAbleToDealDamage)
         {
             playerBehaviour = other.GetComponent<PlayerBehaviour>();
-            if (playerBehaviour.isImmune)
+            if (playerBehaviour.isImmune && playerBehaviour.isParrying)
             {
                 playerBehaviour.ParryEnemy(enemyBehaviour);
             }

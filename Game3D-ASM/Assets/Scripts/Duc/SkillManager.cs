@@ -11,6 +11,7 @@ public class SkillManager : MonoBehaviour
     public float searchRadius = 10f;
     private Animator anim;
     private EnemyBehaviour enemy;
+    public PlayerBehaviour player;
 
     private int coldDownTime1 = 20;
     private int coldDownTime2 = 20;
@@ -39,9 +40,14 @@ public class SkillManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                CastSkill(skill1);
-                coldDownTime1 = 0;
-                skillSound1.Play();
+                Skill skill = skill1.GetComponent<Skill>();
+                if (player.MP >= skill.manaUse)
+                {
+                    player.ConsumeMana(skill.manaUse);
+                    CastSkill(skill1);
+                    coldDownTime1 = 0;
+                    skillSound1.Play();
+                }
             }
         }
 
@@ -55,9 +61,14 @@ public class SkillManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                CastSkill(skill2);
-                coldDownTime2 = 0;
-                skillSound2.Play();
+                Skill skill = skill2.GetComponent<Skill>();
+                if (player.MP >= skill.manaUse)
+                {
+                    player.ConsumeMana(skill.manaUse);
+                    CastSkill(skill2);
+                    coldDownTime2 = 0;
+                    skillSound2.Play();
+                }
             }
         }
     }
