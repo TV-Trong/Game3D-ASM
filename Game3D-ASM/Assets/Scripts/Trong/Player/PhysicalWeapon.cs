@@ -25,9 +25,11 @@ public class PhysicalWeapon : MonoBehaviour
         {
             SetUpPlayerStat();
             isCrit = playerBehaviour.CheckCritChance(playerCritChance);
-            finalDamage = playerDamage * sharpness;
+            float randomFactor = Random.Range(0.8f, 1.2f);
+            finalDamage = (playerDamage * sharpness) * randomFactor;
             poiseDamage = sharpness * heaviness;
             if (isCrit) finalDamage *= playerCritPower;
+            finalDamage = Mathf.Ceil(finalDamage);
             playerBehaviour.DealDamage(other.gameObject, finalDamage, poiseDamage, isCrit);
         }
     }

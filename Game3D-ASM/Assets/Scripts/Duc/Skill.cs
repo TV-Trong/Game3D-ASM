@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
+    public float manaUse;
     public float skillDamage;
     public float skillCritDamage;
     public float critRate;

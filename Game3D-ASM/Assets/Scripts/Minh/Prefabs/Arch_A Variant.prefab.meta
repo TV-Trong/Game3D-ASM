@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Game3D-ASM/Assets/Scripts/Minh/Prefabs/Arch_A Variant.prefab.meta
 guid: 8e5b6f972687d4a369d4599dcdecfeb2
 PrefabImporter:
+========
+guid: 3db3b1c26b6734c1fb03a8b208820974
+DefaultImporter:
+>>>>>>>> main:Game3D-ASM/Assets/Tany/KTK_Effect_Samples/Scenes/Effect_Asset_Set_Sample1.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
