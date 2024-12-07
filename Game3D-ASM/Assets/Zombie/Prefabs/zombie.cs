@@ -5,12 +5,17 @@ namespace ASM19301
 {
     public class EnemyAI : MonoBehaviour
     {
+        [Header("Enemy Stats")]
+        [SerializeField] private float maxHP = 100f; // Máu tối đa
+        [SerializeField] private float damage = 10f; // Sát thương cơ bản
+        [SerializeField] private float attackCooldown = 1.5f; // Thời gian hồi chiêu tấn công
+        [SerializeField] private float detectionRadius = 15f; // Bán kính phát hiện người chơi
+        [SerializeField] private float attackRadius = 2f; // Bán kính tấn công
+
+        [Header("AI & Movement")]
         public float patrolDuration = 8f;
         public float restDuration = 2f;
         public float patrolDistance = 10f;
-        public float detectionRadius = 15f;
-        public float attackRadius = 2f;
-        public float attackCooldown = 1.5f;
 
         private NavMeshAgent agent;
         private Animator animator;
@@ -23,11 +28,14 @@ namespace ASM19301
         private bool isAttacking = false;
         private GameObject detectedPlayer = null;
 
+        private float currentHP;
+
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             patrolTimer = patrolDuration;
+            currentHP = maxHP; // Khởi tạo HP cho Enemy
             ChooseNewDirection();
             SetAnimationState("isPatrolling");
         }
@@ -117,9 +125,15 @@ namespace ASM19301
             if (!isAttacking && detectedPlayer != null)
             {
                 SetAnimationState("isAttacking");
-                agent.isStopped = true; // Dừng di chuyển khi tấn công
+                agent.isStopped = true;
                 isAttacking = true;
-                attackTimer = attackCooldown; // Đặt lại thời gian chờ
+                attackTimer = attackCooldown;
+
+                // Gây sát thương
+                float healthDamage = Random.Range(10f, 20f); // Sát thương cơ bản
+                float poiseDamage = 5f; // Sát thương poise
+                bool isCrit = Random.Range(0f, 100f) < 20f; // 20% cơ hội chí mạng
+                DealDamage(detectedPlayer, healthDamage, poiseDamage, isCrit);
             }
 
             attackTimer -= Time.deltaTime;
@@ -132,23 +146,27 @@ namespace ASM19301
 
                     if (distanceToPlayer > attackRadius && distanceToPlayer <= detectionRadius)
                     {
-                        // Nếu Player ngoài tầm tấn công nhưng trong tầm truy đuổi
-                        isAttacking = false; // Ngừng tấn công
-                        SetAnimationState("isChasing"); // Chuyển sang trạng thái chasing
-                        StartChasingPlayer(); // Quay lại trạng thái truy đuổi
+                        isAttacking = false;
+                        StartChasingPlayer();
                     }
                     else if (distanceToPlayer > detectionRadius)
                     {
-                        // Nếu Player ngoài tầm truy đuổi
-                        isAttacking = false; // Ngừng tấn công
-                        ResetToPatrol(); // Quay lại tuần tra
+                        ResetToPatrol();
                     }
                     else
                     {
-                        // Nếu Player vẫn trong tầm tấn công, tiếp tục tấn công
                         attackTimer = attackCooldown;
                     }
                 }
+            }
+        }
+
+        public void DealDamage(GameObject target, float healthDamage, float poiseDamage, bool isCrit)
+        {
+            PlayerBehaviour player = target.GetComponent<PlayerBehaviour>();
+            if (player != null)
+            {
+                player.TakeDamage(healthDamage, poiseDamage, isCrit);
             }
         }
 
@@ -156,11 +174,11 @@ namespace ASM19301
         {
             if (isAttacking || isChasing)
             {
-                isAttacking = false; // Ngừng tấn công
-                isChasing = false;   // Ngừng truy đuổi
-                detectedPlayer = null; // Xóa tham chiếu đến Player
-                agent.isStopped = false; // Cho phép di chuyển tuần tra
-                SetAnimationState("isPatrolling"); // Chạy animation tuần tra
+                isAttacking = false;
+                isChasing = false;
+                detectedPlayer = null;
+                agent.isStopped = false;
+                SetAnimationState("isPatrolling");
                 patrolTimer = patrolDuration;
                 ChooseNewDirection();
             }
@@ -171,9 +189,9 @@ namespace ASM19301
             if (!isChasing)
             {
                 isChasing = true;
-                isAttacking = false; // Ngừng tấn công khi bắt đầu truy đuổi
+                isAttacking = false;
                 SetAnimationState("isChasing");
-                agent.isStopped = false; // Bắt đầu di chuyển
+                agent.isStopped = false;
             }
         }
 
@@ -199,10 +217,42 @@ namespace ASM19301
 
         private void SetAnimationState(string state)
         {
-            // Reset tất cả các animation khác và chỉ bật animation đang hoạt động
             animator.SetBool("isPatrolling", state == "isPatrolling");
             animator.SetBool("isChasing", state == "isChasing");
             animator.SetBool("isAttacking", state == "isAttacking");
+        }
+
+        // Phương thức nhận sát thương
+        public void TakeDamage(float damage)
+        {
+            currentHP -= damage;
+
+            // Kiểm tra khi máu về 0
+            if (currentHP <= 0)
+            {
+                Die();
+            }
+        }
+
+        // Phương thức chết
+        private void Die()
+        {
+            SetAnimationState("isDead"); // Chạy animation chết
+            Invoke(nameof(DestroyEnemy), 2f); // Xóa Enemy sau 2 giây
+        }
+
+        private void DestroyEnemy()
+        {
+            Destroy(gameObject); // Xóa đối tượng Enemy
+        }
+        // Vẽ phạm vi detection và tấn công trên Editor
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRadius);
         }
     }
 }
