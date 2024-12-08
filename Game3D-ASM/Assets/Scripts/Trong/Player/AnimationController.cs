@@ -37,6 +37,7 @@ public class AnimationController : MonoBehaviour
         {
             if (playerBehaviour.isParrySuccess)
             {
+                playerBehaviour.GainStamina(30); 
                 animator.SetTrigger("CounterSlash");
                 playerBehaviour.isParrySuccess = false;
                 playerBehaviour.counterAttackTime = 1f;
@@ -47,6 +48,14 @@ public class AnimationController : MonoBehaviour
                 if (timeSinceLastAtk > attackResetTime) attackIndex = 0;
                 if (!isOnBufferTime)
                 {
+                    switch (attackIndex)
+                    {
+                        case 0: if (playerBehaviour.stamina >= 15) playerBehaviour.DrainStamina(15); else return; break;
+                        case 1: if (playerBehaviour.stamina >= 15) playerBehaviour.DrainStamina(20); else return; break;
+                        case 2: if (playerBehaviour.stamina >= 20) playerBehaviour.DrainStamina(20); else return; break;
+                        default: break;
+                    }
+
                     animator.SetTrigger("Attack");
                     animator.SetInteger("AttackPattern", attackIndex);
 
