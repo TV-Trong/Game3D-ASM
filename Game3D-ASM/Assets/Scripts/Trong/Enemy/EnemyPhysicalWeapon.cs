@@ -28,9 +28,12 @@ public class EnemyPhysicalWeapon : MonoBehaviour
                 playerBehaviour.ParryEnemy(enemyBehaviour);
             }
             SetUpEnemyStat();
-            isCrit = (enemyBehaviour.CheckCritChance(enemyCritChance));
+
             finalDamage = enemyDamage * sharpness;
+
+            isCrit = (enemyBehaviour.CheckCritChance(enemyCritChance));
             if (isCrit) finalDamage *= enemyCritPower;
+
             enemyBehaviour.DealDamage(other.gameObject, finalDamage, 0, isCrit);
         }
     }
