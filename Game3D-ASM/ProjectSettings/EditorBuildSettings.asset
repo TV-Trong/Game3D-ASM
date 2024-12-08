@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: a2916dea379e3684bbdf43e7d1190a0e
   - enabled: 1
     path: Assets/Scenes/Duc.unity
-    guid: f74c98ce6441efc4bbf25c306b613e36
+    guid: b520c06a3c73fc44483231729032bc6d
   - enabled: 1
     path: Assets/Scenes/BossFight.unity
     guid: 475399289490940419bfbe41ba337178
