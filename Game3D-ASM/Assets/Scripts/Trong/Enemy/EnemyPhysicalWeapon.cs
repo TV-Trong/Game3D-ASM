@@ -25,7 +25,7 @@ public class EnemyPhysicalWeapon : MonoBehaviour
             playerBehaviour = other.GetComponent<PlayerBehaviour>();
             if (playerBehaviour.isImmune && playerBehaviour.isParrying)
             {
-                playerBehaviour.ParryEnemy(enemyBehaviour);
+                playerBehaviour.ParryEnemy(enemyBehaviour.gameObject);
             }
             SetUpEnemyStat();
 

@@ -203,9 +203,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         anim.Die();
         SoundManager.instance.PlayClip(deathSound);
     }
-    public void ParryEnemy(EnemyBehaviour enemyBehaviour)
+    public void ParryEnemy(GameObject enemy)
     {
-        enemyBehaviour.GetParried();
+        EnemyBehaviour enemyBehaviour = enemy.GetComponent<EnemyBehaviour>();
+        if (enemyBehaviour != null) enemyBehaviour.GetParried();
         isParrySuccess = true;
         SlashEffect slashEffect = GetComponent<SlashEffect>();
         slashEffect.PlayCounterEffect();

@@ -27,9 +27,13 @@ namespace ASM19301
         private bool isResting = false;
         private bool isChasing = false;
         private bool isAttacking = false;
+        private bool isDeath = false;
         private GameObject detectedPlayer = null;
 
         private float currentHP;
+
+        public Transform popupTextTransform;
+        public AudioClip getHit;
 
         // Tham chiếu đến thanh HP UI
         [Header("UI Elements")]
@@ -58,18 +62,21 @@ namespace ASM19301
         {
             DetectPlayer();
 
-            if (detectedPlayer != null)
+            if (detectedPlayer != null && !isDeath)
             {
                 float distanceToPlayer = Vector3.Distance(transform.position, detectedPlayer.transform.position);
+                Debug.Log(distanceToPlayer);
 
                 if (distanceToPlayer <= attackRadius)
                 {
                     AttackPlayer();
+                    Debug.Log("1");
                 }
                 else if (distanceToPlayer <= detectionRadius)
                 {
                     StartChasingPlayer();
                     ChasePlayer();
+                    Debug.Log("2");
                 }
                 else
                 {
@@ -101,15 +108,17 @@ namespace ASM19301
             }
 
             // Kiểm tra cheat khi nhấn phím "A"
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                TakeDamage(50f); // Giảm 50 HP nếu nhấn phím A
-            }
+            //if (Input.GetKeyDown(KeyCode.A))
+            //{
+            //    TakeDamage(50f); // Giảm 50 HP nếu nhấn phím A
+            //}
         }
 
         // Phương thức nhận sát thương
         public void TakeDamage(float damage)
         {
+            SoundManager.instance.PlayClip(getHit);
+            DisplayDamageTaken(damage, false);
             currentHP -= damage;
 
             // Cập nhật thanh HP
@@ -125,7 +134,18 @@ namespace ASM19301
             if (currentHP <= 0)
             {
                 Die();
+                isDeath = true;
             }
+        }
+        public void DisplayDamageTaken(float damage, bool isCrit)
+        {
+            GameObject popupTextObject = ObjectsPooler.instance.GetPooledObjects(0);
+            popupTextObject.transform.position = popupTextTransform.position;
+            PopupDamage popupDamage = popupTextObject.GetComponent<PopupDamage>();
+            popupDamage.Setup(damage);
+            popupDamage.SetDamageColor(Color.red);
+            if (isCrit) popupDamage.SetDamageColor(Color.yellow);
+            popupTextObject.SetActive(true);
         }
 
         // Phương thức chết
@@ -232,6 +252,7 @@ namespace ASM19301
                     else
                     {
                         attackTimer = attackCooldown;
+                        isAttacking = false;
                     }
                 }
             }
@@ -240,6 +261,11 @@ namespace ASM19301
         public void DealDamage(GameObject target, float healthDamage, float poiseDamage, bool isCrit)
         {
             PlayerBehaviour player = target.GetComponent<PlayerBehaviour>();
+            if (player.isImmune && player.isParrying)
+            {
+                player.ParryEnemy(gameObject);
+                return;
+            }
             if (player != null)
             {
                 player.TakeDamage(healthDamage, poiseDamage, isCrit);  // Gọi phương thức của người chơi để nhận sát thương
@@ -279,6 +305,7 @@ namespace ASM19301
                 if (hit.CompareTag("Player"))
                 {
                     detectedPlayer = hit.gameObject;
+                    Debug.Log(detectedPlayer.name);
                     return;
                 }
             }
@@ -299,6 +326,16 @@ namespace ASM19301
 
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, attackRadius);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Weapon"))
+            {
+                PhysicalWeapon weapon = other.GetComponent<PhysicalWeapon>();
+                if (weapon.isAbleToDealDamage)
+                    TakeDamage(weapon.GetFinalDamage());
+            }
         }
     }
 }
