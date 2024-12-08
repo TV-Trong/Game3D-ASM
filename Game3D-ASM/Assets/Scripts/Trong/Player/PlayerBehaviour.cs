@@ -128,8 +128,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         if (!isImmune && !isDead)
         {
-            HP -= healthDamage;
-            DisplayDamageTaken(healthDamage, isCrit);
+            float finalDamage = healthDamage * (100 / (100 + armor));
+            finalDamage = Mathf.Ceil(finalDamage);
+            HP -= finalDamage;
+            DisplayDamageTaken(finalDamage, isCrit);
             isImmune = true;
             Invoke("ResetIFrame", iFrameTime);
             SoundManager.instance.PlayClip(hit);

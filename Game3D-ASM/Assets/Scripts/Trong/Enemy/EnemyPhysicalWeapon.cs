@@ -29,8 +29,7 @@ public class EnemyPhysicalWeapon : MonoBehaviour
             }
             SetUpEnemyStat();
 
-            finalDamage = (enemyDamage * (100 / (playerBehaviour.armor + 100))) * sharpness;
-            finalDamage = Mathf.Ceil(finalDamage);
+            finalDamage = enemyDamage * sharpness;
 
             isCrit = (enemyBehaviour.CheckCritChance(enemyCritChance));
             if (isCrit) finalDamage *= enemyCritPower;
