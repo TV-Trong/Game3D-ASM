@@ -6,19 +6,19 @@ public class BuffEffectFX : MonoBehaviour
     public float buffDuration; // Thời gian tồn tại của buff (giây)
     private float buffTimer; // Biến theo dõi thời gian đã trôi qua của buff
 
-    public float healthIncrease; // Tỷ lệ tăng máu (50%)
-    public float attackIncrease; // Tỷ lệ tăng sức tấn công (50%)
-
+    public float healthIncrease; // Tỷ lệ tăng máu 
+    public float attackIncrease; // Tỷ lệ tăng sức tấn công 
     private float originalHealth; // Lưu trữ lượng máu ban đầu
     private float originalAttack; // Lưu trữ sức tấn công ban đầu
+    public float manaCost; //lượng mana cần để kích hoạt
 
     private GameObject buffFXInstance; // Lưu trữ GameObject của hiệu ứng FX
 
     void Start()
     {
         // Lưu trữ lượng máu và sức tấn công ban đầu
-        originalHealth = GetComponent<PlayerBehaviour>().HP; // Giả sử bạn có component Health
-        originalAttack = GetComponent<PlayerBehaviour>().strength; // Giả sử bạn có component Attack
+        originalHealth = GetComponent<PlayerBehaviour>().HP;
+        originalAttack = GetComponent<PlayerBehaviour>().strength;
     }
 
     void Update()
@@ -43,34 +43,38 @@ public class BuffEffectFX : MonoBehaviour
 
     public void ApplyBuff()
     {
-        // Tạo bản sao của hiệu ứng FX
-        buffFXInstance = Instantiate(buffFXPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        if (GetComponent<PlayerBehaviour>().MP >= manaCost)
+        {
+            // Trừ mana của nhân vật
+            GetComponent<PlayerBehaviour>().ConsumeMana(manaCost);
 
-        //đi theo nhân vật
-        buffFXInstance.transform.parent = transform;
+            // Tạo bản sao của hiệu ứng FX
+            buffFXInstance = Instantiate(buffFXPrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
-        // Bắt đầu phát hiệu ứng FX
-        ParticleSystem particleSystem = buffFXInstance.GetComponent<ParticleSystem>();
-        particleSystem.Play();
+            //đi theo nhân vật
+            buffFXInstance.transform.parent = transform;
 
-        // Tăng máu và sức tấn công
-        GetComponent<PlayerBehaviour>().HP = originalHealth * (1 + healthIncrease);
-        GetComponent<PlayerBehaviour>().strength = originalAttack * (1 + attackIncrease);
+            // Bắt đầu phát hiệu ứng FX
+            ParticleSystem particleSystem = buffFXInstance.GetComponent<ParticleSystem>();
+            particleSystem.Play();
 
-        // Khởi tạo thời gian đã trôi qua của buff
-        buffTimer = buffDuration;
+            // Tăng máu và sức tấn công
+            GetComponent<PlayerBehaviour>().HP = originalHealth * (1 + healthIncrease);
+            GetComponent<PlayerBehaviour>().strength = originalAttack * (1 + attackIncrease);
+
+            // Khởi tạo thời gian đã trôi qua của buff
+            buffTimer = buffDuration;
+        }
     }
 
     public void RemoveBuff()
     {
-        // Xóa hiệu ứng FX
         Destroy(buffFXInstance);
 
         // Khôi phục máu và sức tấn công
         GetComponent<PlayerBehaviour>().HP = originalHealth;
         GetComponent<PlayerBehaviour>().strength = originalAttack;
 
-        // Đặt lại thời gian đã trôi qua của buff
         buffTimer = 0f;
     }
 }

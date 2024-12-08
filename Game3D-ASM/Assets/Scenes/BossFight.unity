@@ -31499,6 +31499,63 @@ Transform:
   - {fileID: 2140753426}
   m_Father: {fileID: 708865262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &432711601
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100006, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_Name
+      value: Eff_Aura_1_loop
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
 --- !u!1 &441265147
 GameObject:
   m_ObjectHideFlags: 0
@@ -53185,6 +53242,11 @@ Transform:
   - {fileID: 364461917}
   m_Father: {fileID: 1842554391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &895580753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: d6ebb0ab3f51846fdbe1ebd88c5a39e0, type: 3}
+  m_PrefabInstance: {fileID: 432711601}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &903922384
 GameObject:
   m_ObjectHideFlags: 0
@@ -57015,6 +57077,7 @@ GameObject:
   - component: {fileID: 1381341115}
   - component: {fileID: 1381341116}
   - component: {fileID: 1381341117}
+  - component: {fileID: 1381341118}
   m_Layer: 0
   m_Name: Asuna
   m_TagString: Player
@@ -57344,6 +57407,23 @@ MonoBehaviour:
   player: {fileID: 1381341114}
   skillSound1: {fileID: 549399503}
   skillSound2: {fileID: 782476175}
+--- !u!114 &1381341118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381341105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd8d5b51e4ba734082b9c7fbd61b608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffFXPrefab: {fileID: 895580753}
+  buffDuration: 10
+  healthIncrease: 1
+  attackIncrease: 1
+  manaCost: 50
 --- !u!1 &1438427399
 GameObject:
   m_ObjectHideFlags: 0
@@ -185736,3 +185816,4 @@ SceneRoots:
   - {fileID: 263508958}
   - {fileID: 1850912507}
   - {fileID: 3629018338058995176}
+  - {fileID: 432711601}
