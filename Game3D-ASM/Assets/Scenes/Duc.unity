@@ -348,6 +348,7 @@ MonoBehaviour:
   playerBehaviour: {fileID: 1381341114}
   piercing: 1
   vTPC: {fileID: 1381341109}
+  isAbleToDealDamage: 0
 --- !u!1001 &1997101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16716,6 +16717,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &129250588
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -77996,6 +77998,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &541500031
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -82564,6 +82567,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &599062495
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -91678,6 +91682,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &639646136
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -93086,6 +93091,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &650970116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -104708,6 +104714,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &732137537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -128026,6 +128033,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &883399837
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -130083,6 +130091,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &909296929
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -140686,6 +140695,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &1029714683
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -145725,6 +145735,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &1082717001
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -148679,6 +148690,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &1108494897
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -173264,9 +173276,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HP>k__BackingField: 200
   healthRegen: 5
-  <MP>k__BackingField: 20
+  <MP>k__BackingField: 100
   manaRegen: 5
-  <stamina>k__BackingField: 30
+  <stamina>k__BackingField: 50
   staminaRegen: 5
   <moveSpeed>k__BackingField: 100
   <strength>k__BackingField: 15
@@ -184934,6 +184946,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &1470195167
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -212038,6 +212051,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!195 &1623286342
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -224048,6 +224062,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &1706000820
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -275885,6 +275900,7 @@ MonoBehaviour:
   playerBehaviour: {fileID: 1381341114}
   piercing: 1
   vTPC: {fileID: 1381341109}
+  isAbleToDealDamage: 0
 --- !u!136 &2011881210
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -279712,6 +279728,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   slashSounds: []
   explodetion: {fileID: 0}
+  endPortal: {fileID: 0}
 --- !u!65 &2052497936
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -281867,6 +281884,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 152660efcfc544b47b6918a5d0af6c07, type: 3}
   - {fileID: 8300000, guid: db322014eabdf6e449876b5452395b56, type: 3}
   explodetion: {fileID: 8300000, guid: e081777152dd3f34b9861f2973a461b9, type: 3}
+  endPortal: {fileID: 0}
 --- !u!136 &2074372586
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -9903,8 +9903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1759c6a426f664ba638b461cd35ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manaUse: 20
   skillDamage: 10
-  skillCritDamage: 20
+  skillCritDamage: 2
   critRate: 30
   skillManager: {fileID: 0}
   enemy: {fileID: 0}

@@ -8,6 +8,6 @@ public class FinalBoss : EnemyBehaviour
     public GameObject endPortal;
     private void OnDestroy()
     {
-        endPortal.SetActive(true);
+        if (endPortal != null) endPortal.SetActive(true);
     }
 }

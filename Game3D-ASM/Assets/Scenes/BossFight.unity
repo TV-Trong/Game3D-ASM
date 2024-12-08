@@ -78542,15 +78542,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a60824207e0da749ba76a2e7f981240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HP>k__BackingField: 1
+  <HP>k__BackingField: 1500
   <MP>k__BackingField: 100
   <stamina>k__BackingField: 1000
   <moveSpeed>k__BackingField: 1.5
   <strength>k__BackingField: 30
   <armor>k__BackingField: 30
   <poise>k__BackingField: 20
-  <critChance>k__BackingField: 0
-  <critPower>k__BackingField: 0
+  <critChance>k__BackingField: 20
+  <critPower>k__BackingField: 1.5
   <iFrameTime>k__BackingField: 0.2
   <isImmune>k__BackingField: 0
   <popupTextTransform>k__BackingField: {fileID: 1080187900}
@@ -156022,12 +156022,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9205605277806567939, guid: c2d31cdc38207eb46a1a8da8fc658338, type: 3}
       propertyPath: manaUse
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9205605277806567939, guid: c2d31cdc38207eb46a1a8da8fc658338, type: 3}
       propertyPath: skillManager
       value: 
       objectReference: {fileID: 1381341117}
+    - target: {fileID: 9205605277806567939, guid: c2d31cdc38207eb46a1a8da8fc658338, type: 3}
+      propertyPath: skillCritDamage
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6317112799141230048, guid: c2d31cdc38207eb46a1a8da8fc658338, type: 3}
     m_RemovedGameObjects: []

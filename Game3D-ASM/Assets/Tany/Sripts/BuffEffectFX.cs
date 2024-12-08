@@ -11,14 +11,15 @@ public class BuffEffectFX : MonoBehaviour
     private float originalHealth; // Lưu trữ lượng máu ban đầu
     private float originalAttack; // Lưu trữ sức tấn công ban đầu
     public float manaCost; //lượng mana cần để kích hoạt
+    private bool isBuffing;
 
     private GameObject buffFXInstance; // Lưu trữ GameObject của hiệu ứng FX
 
     void Start()
     {
         // Lưu trữ lượng máu và sức tấn công ban đầu
-        originalHealth = GetComponent<PlayerBehaviour>().HP;
-        originalAttack = GetComponent<PlayerBehaviour>().strength;
+        originalHealth = GetComponent<PlayerBehaviour>().maxHP;
+        originalAttack = GetComponent<PlayerBehaviour>().baseStrenght;
     }
 
     void Update()
@@ -27,6 +28,7 @@ public class BuffEffectFX : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && buffTimer <= 0f)
         {
             ApplyBuff();
+            isBuffing = true;
         }
 
         // Cập nhật thời gian đã trôi qua của buff
@@ -37,7 +39,13 @@ public class BuffEffectFX : MonoBehaviour
             if (buffTimer <= 0f)
             {
                 RemoveBuff();
+                isBuffing = false;
             }
+        }
+
+        if (isBuffing)
+        {
+            GetComponent<PlayerBehaviour>().strength = originalAttack * (1 + attackIncrease);
         }
     }
 
@@ -59,7 +67,8 @@ public class BuffEffectFX : MonoBehaviour
             particleSystem.Play();
 
             // Tăng máu và sức tấn công
-            GetComponent<PlayerBehaviour>().HP = originalHealth * (1 + healthIncrease);
+            GetComponent<PlayerBehaviour>().maxHP = originalHealth * (1 + healthIncrease);
+            GetComponent<PlayerBehaviour>().HP = GetComponent<PlayerBehaviour>().maxHP;
             GetComponent<PlayerBehaviour>().strength = originalAttack * (1 + attackIncrease);
 
             // Khởi tạo thời gian đã trôi qua của buff
@@ -72,7 +81,7 @@ public class BuffEffectFX : MonoBehaviour
         Destroy(buffFXInstance);
 
         // Khôi phục máu và sức tấn công
-        GetComponent<PlayerBehaviour>().HP = originalHealth;
+        GetComponent<PlayerBehaviour>().maxHP = originalHealth;
         GetComponent<PlayerBehaviour>().strength = originalAttack;
 
         buffTimer = 0f;
