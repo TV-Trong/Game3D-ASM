@@ -92,6 +92,7 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     private void Awake()
     {
         playerObject = GameObject.FindWithTag("Player");
+        player = playerObject.GetComponent<PlayerBehaviour>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -268,6 +269,14 @@ public class EnemyBehaviour : MonoBehaviour, ICharacter
     {
         int randomInt = Random.Range(0, 2);
         return slashSounds[randomInt];
+    }
+
+    public void CheckPlayerDeath()
+    {
+        if (player.isDead)
+        {
+            animator.SetTrigger("Victory");
+        }
     }
     #endregion
 }

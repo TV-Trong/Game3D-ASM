@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     public float maxSP { get; set; }
     public float baseStrenght { get; set; }
     public float maxPoise { get; set; }
-    private bool isDead;
+    public bool isDead;
     #endregion
 
 
