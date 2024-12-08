@@ -10,7 +10,7 @@ public class PhysicalWeapon : MonoBehaviour
     [SerializeField] private PlayerBehaviour playerBehaviour;
     [SerializeField] private int piercing;
     [SerializeField] vThirdPersonController vTPC;
-    private bool isAbleToDealDamage;
+    public bool isAbleToDealDamage;
     private float playerDamage;
     private float playerCritChance;
     private float playerCritPower;
@@ -34,6 +34,17 @@ public class PhysicalWeapon : MonoBehaviour
         }
     }
 
+    public float GetFinalDamage()
+    {
+        SetUpPlayerStat();
+        isCrit = playerBehaviour.CheckCritChance(playerCritChance);
+        float randomFactor = Random.Range(0.8f, 1.2f);
+        finalDamage = (playerDamage * sharpness) * randomFactor;
+        poiseDamage = sharpness * heaviness;
+        if (isCrit) finalDamage *= playerCritPower;
+        finalDamage = Mathf.Ceil(finalDamage);
+        return finalDamage;
+    }
     public void ReadyToDealDamage()
     {
         isAbleToDealDamage = true;
