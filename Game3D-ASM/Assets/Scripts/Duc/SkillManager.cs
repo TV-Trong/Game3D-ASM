@@ -48,6 +48,9 @@ public class SkillManager : MonoBehaviour
                     coldDownTime1 = 0;
                     skillSound1.Play();
                 }
+                //CastSkill(skill1);
+                //coldDownTime1 = 0;
+                //skillSound1.Play();
             }
         }
 
