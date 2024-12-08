@@ -14,6 +14,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public float manaRegen = 5;
     [field: SerializeField] public float stamina { get; set; }
+    public float staminaRegen = 5;
     [field: SerializeField] public float moveSpeed { get; set; }
     [field: SerializeField] public float strength { get; set; }
     [field: SerializeField] public float armor { get; set; }
@@ -25,8 +26,10 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     [field: SerializeField] public Transform popupTextTransform { get; set; }
     [field: SerializeField] public Slider healthSlider { get; set; }
     public Slider manaSlider;
+    public Slider staminaSlider;
     public float maxHP { get; set; }
     public float maxMP { get; set; }
+    public float maxSP { get; set; }
     public float baseStrenght { get; set; }
     public float maxPoise { get; set; }
     private bool isDead;
@@ -43,6 +46,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     private EnemyBehaviour enemy;
     [SerializeField] private TextMeshProUGUI textNumber;
     [SerializeField] private TextMeshProUGUI MP_textNumber;
+    [SerializeField] private TextMeshProUGUI SP_textNumber;
 
     #region State Machine
     public PlayerStateMachine playerStateMachine;
@@ -66,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
         counterAttackTime = 1.5f;
         maxHP = HP;
         maxMP = MP;
+        maxSP = stamina;
         baseStrenght = strength;
         UpdateSlider();
         StartCoroutine(Regenerate());
@@ -88,15 +93,24 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     #region Methods
     IEnumerator Regenerate()
     {
-        while (true)
+        while (!isDead)
         {
-            yield return new WaitForSeconds(1);
             if (MP < maxMP) MP += manaRegen;
             if (HP < maxHP) HP += healthRegen;
-            MP = Mathf.Clamp(MP, 0 , maxMP);
-            HP = Mathf.Clamp(HP, 0, maxHP);
+            if (stamina < maxSP) stamina += staminaRegen;
             UpdateSlider();
+            yield return new WaitForSeconds(1);
         }
+    }
+    public void DrainStamina(float stamina)
+    {
+        this.stamina -= stamina;
+        UpdateSlider();
+    }
+    public void GainStamina(float stamina)
+    {
+        this.stamina += stamina;
+        UpdateSlider();
     }
     public bool CheckCritChance(float critChance)
     {
@@ -151,7 +165,6 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         weapon.StopDealingDamage();
     }
-
     public void ResetIFrame()
     {
         isImmune = false;
@@ -170,14 +183,21 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
 
     public void UpdateSlider()
     {
+        MP = Mathf.Clamp(MP, 0, maxMP);
+        HP = Mathf.Clamp(HP, 0, maxHP);
+        stamina = Mathf.Clamp(stamina, 0, maxSP);
         healthSlider.value = HP / maxHP;
         textNumber.text = HP + "   /   " + maxHP;
         manaSlider.value = MP / maxMP;
         MP_textNumber.text = MP + "   /   " + maxMP;
+        staminaSlider.value = stamina / maxSP;
+        SP_textNumber.text = stamina + "   /   " + maxSP;
     }
     public void Die()
     {
         AnimationController anim = GetComponent<AnimationController>();
+        HP = 0;
+        UpdateSlider();
         anim.Die();
         SoundManager.instance.PlayClip(deathSound);
     }
@@ -200,9 +220,9 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
             SoundManager.instance.PlayClip(unshealth);
         }
     }
-    public void SetCounterDamage()
+    public void StrengthUp(float multiplier)
     {
-        strength *= 1.5f;
+        strength *= multiplier;
     }
     public void ReturnToBaseStrength()
     {
