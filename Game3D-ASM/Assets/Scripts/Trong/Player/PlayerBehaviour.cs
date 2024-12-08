@@ -172,8 +172,8 @@ public class PlayerBehaviour : MonoBehaviour, ICharacter
     {
         healthSlider.value = HP / maxHP;
         textNumber.text = HP + "   /   " + maxHP;
-        manaSlider.value = MP / maxMP;
-        MP_textNumber.text = MP + "   /   " + maxMP;
+        //manaSlider.value = MP / maxMP;
+        //MP_textNumber.text = MP + "   /   " + maxMP;
     }
     public void Die()
     {

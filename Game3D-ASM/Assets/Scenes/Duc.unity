@@ -67387,7 +67387,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <HP>k__BackingField: 200
+  healthRegen: 5
   <MP>k__BackingField: 20
+  manaRegen: 5
   <stamina>k__BackingField: 30
   <moveSpeed>k__BackingField: 100
   <strength>k__BackingField: 15
@@ -67399,6 +67401,7 @@ MonoBehaviour:
   <isImmune>k__BackingField: 0
   <popupTextTransform>k__BackingField: {fileID: 1559446780}
   <healthSlider>k__BackingField: {fileID: 2039256259}
+  manaSlider: {fileID: 0}
   swordIdle: {fileID: 1545103}
   swordOnCombat: {fileID: 2011881207}
   isOnCombatStage: 0
@@ -67406,6 +67409,7 @@ MonoBehaviour:
   isParrySuccess: 0
   counterAttackTime: 0
   textNumber: {fileID: 1828352901}
+  MP_textNumber: {fileID: 0}
   hit: {fileID: 8300000, guid: fc772b3fe16f9604a8d90a32eb4ba542, type: 3}
   deathSound: {fileID: 8300000, guid: 836060fbcb662fb4fb27e8b5662b0263, type: 3}
   shealthSword: {fileID: 8300000, guid: 1d07f2167db13ee4e82c2de2e11f3190, type: 3}
@@ -67470,6 +67474,7 @@ MonoBehaviour:
   skill2: {fileID: 1601506141858817897}
   distance: 10
   searchRadius: 10
+  player: {fileID: 1381341114}
   skillSound1: {fileID: 549399503}
   skillSound2: {fileID: 782476175}
 --- !u!1 &1384435383
